@@ -27,7 +27,7 @@ def create_record(album)
     genre: album.tags.tag[0].name,
     year: Date.parse(album.wiki.published).year,
     available: true,
-    user_id: User.find(rand(1..User.count)),
+    user_id: rand(1..User.count),
     price: 3
   )
   cover = URI.open(album.image[3]['#text'])
@@ -36,11 +36,11 @@ def create_record(album)
   puts "Created Album #{album.name}!"
 end
 
-get_album('tool', 'lateralus')
-get_album('porcupine tree', 'deadwing')
-get_album('steven wilson', 'the future bites')
-get_album('Led Zeppelin', 'houses of the holy')
-get_album('bjork', 'debut')
+# get_album('tool', 'lateralus')
+# get_album('porcupine tree', 'deadwing')
+# get_album('steven wilson', 'the future bites')
+# get_album('Led Zeppelin', 'houses of the holy')
+get_album('black sabbath', 'paranoid')
 get_album('public enemy', 'fear of a black planet')
 get_album('kate bush', 'hounds of love')
 get_album('radiohead', 'ok computer')
