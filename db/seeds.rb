@@ -21,7 +21,7 @@ def get_album(artist, album)
 end
 
 def create_record(album)
-  Record.create!(
+  new_album = Record.new(
     title: album.name,
     artist: album.artist,
     genre: album.tags.tag[0].name,
@@ -30,6 +30,9 @@ def create_record(album)
     user_id: User.find(rand(1..User.count)),
     price: 3
   )
+  cover = URI.open(album.image[3]['#text'])
+  new_album.cover.attach(io: cover, filename: album.name, content_type: "image/png")
+  new_album.save!
   puts "Created Album #{album.name}!"
 end
 
