@@ -11,10 +11,7 @@
 @import "components/index";
 @import "pages/index";
 
-body {
-  background-color: $offwhite;
-}
 
 .logo {
-  font-family: $logo-font;
+  font-family: $headers-font
 }

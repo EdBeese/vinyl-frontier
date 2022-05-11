@@ -1,21 +1,31 @@
 .banner {
-  background-size: cover;
-  background-position: center;
-  padding: 250px 0;
-  text-align: center;
+  padding: 150px 0;
+  background-color: $offwhite;
+  border-bottom: 2px solid black;
 }
 
 .banner h1 {
-  margin: 0;
-  color: white;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  font-size: 40px;
+  // margin: 0;
+  color: black;
+  // text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 55px;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .banner p {
-  font-size: 20px;
-  color: white;
-  opacity: .7;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 23px;
+  color: black;
+  // opacity: .7;
+  // text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.banner img {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border: 3px solid $black;
+  border-radius: 10px;
 }

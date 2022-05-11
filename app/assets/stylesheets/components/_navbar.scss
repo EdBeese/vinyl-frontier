@@ -2,12 +2,14 @@
   justify-content: space-between;
   background: white;
   border-bottom: 2px solid black;
+  font-size: 18px;
+  color: black;
 }
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.navbar-lewagon .logo {
+  font-size: 30px;
 }
