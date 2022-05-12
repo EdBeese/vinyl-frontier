@@ -20,7 +20,7 @@ class RecordsController < ApplicationController
     @record = Record.new(record_params)
     @record.user = current_user
     if @record.save
-      redirect_to @record, notice: 'Record has been added to your collection'
+      redirect_to record_path(@record), notice: 'Record has been added to your collection'
     else
       render :new
     end
@@ -30,7 +30,7 @@ class RecordsController < ApplicationController
 
   def update
     if @record.update(record_params)
-      redirect_to @record, notice: 'Record was successfully updated'
+      redirect_to record_path(@record), notice: 'Record was successfully updated'
     else
       render :edit
     end
