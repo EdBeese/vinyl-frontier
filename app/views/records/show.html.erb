@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="d-flex">
+    <div class="">
+      <%= cl_image_tag @record.cover.key, alt: "Cover art for #{@record.title} by #{@record.artist}", class: "album-cover"%>
+    </div>
+
+    <div>
+      <h1><%= @record.title %></h1>
+      <h2><%= link_to @record.artist, records_path(query: "tool"), class: 'text-decoration-none' %></h2>
+      <p><%= @record.year %></p>
+      <p><%= @record.genre.capitalize %></p>
+
+      <p>Owner: <%=  %></p>
+      <p>Current Status:
+      <%if @record.available%>
+        <span class="text-success"><i class="fas fa-record-vinyl"></i>Available</span>
+      <%else%>
+        <span class="text-danger"><i class="fas fa-record-vinyl"></i>Unavailable</span>
+      <%end%>
+      </p>
+      <p><i class="fas fa-pound-sign"></i><%=@record.price%> per week</p>
+      <%= link_to "Book Now", new_record_booking_path(@record), class: "btn btn-success"%>
+    </div>
+
+  </div>
+  <div class="d-flex">
+    <%= link_to "Back", :back, class: "btn btn-secondary"%>
+  </div>
+  </div>
+</div>
