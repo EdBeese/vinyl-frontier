@@ -42,6 +42,6 @@ class BookingsController < ApplicationController
   end
 
   def set_booking
-    @booking = Bookmark.find(params[:id])
+    @booking = Booking.find(params[:id])
   end
 end
