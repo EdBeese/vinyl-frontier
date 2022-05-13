@@ -6,7 +6,7 @@
 
     <div>
       <h1><%= @record.title %></h1>
-      <h2><%= link_to @record.artist, records_path(query: "tool"), class: 'text-decoration-none' %></h2>
+      <h2><%= link_to @record.artist, records_path(query: @record.artist), class: 'text-decoration-none' %></h2>
       <p><%= @record.year %></p>
       <p><%= @record.genre.capitalize %></p>
 
