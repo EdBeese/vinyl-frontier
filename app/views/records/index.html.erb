@@ -1,22 +1,25 @@
-<div class="row">
-  <h1 class="results"><%= @title_text %></h1>
-</div>
-<div class="row">
-  <% @records.each do |record|%>
-  <div class="card col-4 col-lg-3 m-3 d-flex align-items-stretch" style="width: 18rem;">
-    <%= image_tag record.cover, class: "card-img-top"%>
-    <div class="card-body">
-      <h4 class="card-title record-artist"><%=record.artist%></h4>
-      <h5 class="record-title"> <%= link_to record.title, record_path(record), class: 'link-primary text-decoration-none' %></h5>
-      <p class="card-text"><%=record.genre.capitalize%></p>
-      <p class="card-text">
-        <%if record.available%>
-          <span class="text-success"><i class="fas fa-record-vinyl"></i>Available</span>
-        <%else%>
-          <span class="text-danger"><i class="fas fa-record-vinyl"></i>Unavailable</span>
-        <%end%>
-        <span class="price"><i class="fas fa-pound-sign"></i><%=record.price%></p></span>
-    </div>
+<div class="container">
+  <div class="row">
+    <h1 class="results"><%= @title_text %></h1>
   </div>
-  <% end %>
+  <div class="row">
+    <% @records.each do |record|%>
+    <div class="card col-4 col-lg-3 m-3 d-flex align-items-stretch" style="width: 18rem;">
+      <%= image_tag record.cover, class: "card-img-top"%>
+      <div class="card-body">
+        <h4 class="card-title record-artist"><%=record.artist%></h4>
+        <h5 class="record-title"> <%= link_to record.title, record_path(record), class: 'link-primary text-decoration-none' %></h5>
+        <p class="card-text"><%=record.genre.capitalize%></p>
+        <p class="card-text">
+          <%if record.available%>
+            <span class="text-success"><i class="fas fa-record-vinyl"></i>Available</span>
+          <%else%>
+            <span class="text-danger"><i class="fas fa-record-vinyl"></i>Unavailable</span>
+          <%end%>
+          <span class="price"><i class="fas fa-pound-sign"></i><%=record.price%></p></span>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
 </div>
