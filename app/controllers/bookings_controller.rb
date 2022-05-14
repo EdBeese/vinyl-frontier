@@ -1,5 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_record, only: [:new, :create]
+
 
   def index
     @user = current_user
@@ -16,6 +18,7 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.record = @record
+    @booking.user = current_user
     if @booking.save
       redirect_to booking_path(@booking)
     else
@@ -41,6 +44,10 @@ class BookingsController < ApplicationController
 
   def booking_params
     params.require(:booking).permit(:pick_up_date, :return_date, :record_id)
+  end
+
+  def set_record
+    @record = Record.find(params[:record_id])
   end
 
   def set_booking
