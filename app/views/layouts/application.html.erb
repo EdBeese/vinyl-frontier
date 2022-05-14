@@ -17,8 +17,12 @@
   <body>
     <%= render 'shared/navbar' %>
     <%# <%= render 'shared/flashes' %>
+    <% if false %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <% end %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
