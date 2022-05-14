@@ -1,2 +1,4 @@
-<h1>Bookings#index</h1>
-<p>Find me in app/views/bookings/index.html.erb</p>
+<h1><%= @bookings.count %></h1>
+<% @bookings.each do |booking| %>
+  <p><%= booking.record.title %></p>
+<% end %>
