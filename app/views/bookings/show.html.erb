@@ -10,8 +10,11 @@
       <p><%= @booking.record.year %></p>
       <p><%= @booking.record.genre.capitalize %></p>
 
-      <p>Renting from <%= @booking.user_id  %> for <i class="fas fa-pound-sign"></i><%= @booking.record.price%> per week</p>
-
+      <% if @booking.user.first_name %>
+        <p>Renting from <%= @booking.user.first_name %> for <i class="fas fa-pound-sign"></i><%= @booking.record.price%> per week</p>
+      <% else %>
+        <p>Renting for <i class="fas fa-pound-sign"></i><%= @booking.record.price%> per week</p>
+      <% end %>
 
       <p><%= @booking.pick_up_date.strftime("Pick up on %m/%d/%Y") %> <%=@booking.pick_up_date.strftime("at %I:%M%p")%></p>
       <p><%= @booking.return_date.strftime("Return on %m/%d/%Y") %> <%=@booking.return_date.strftime("at %I:%M%p")%> </p>
