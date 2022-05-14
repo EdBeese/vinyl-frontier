@@ -1,4 +1,16 @@
-<h1><%= @bookings.count %></h1>
-<% @bookings.each do |booking| %>
-  <p><%= booking.record.title %></p>
-<% end %>
+<div class="container">
+  <h1 class="mb-4">Bookings</h1>
+  <div class="cards">
+    <% @bookings.each do |booking| %>
+      <%= link_to booking_path(booking) do %>
+        <div class="booking-card">
+          <%= image_tag booking.record.cover, class: "booking-img" %>
+          <div class="booking-info">
+            <h5><%= booking.record.title %></h5>
+            <p><%= "#{booking.pick_up_date.strftime("%d/%m/%Y")} - #{booking.return_date.strftime("%d/%m/%Y")}" %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
