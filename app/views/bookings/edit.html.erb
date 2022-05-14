@@ -1,2 +1,14 @@
-<h1>Bookings#edit</h1>
-<p>Find me in app/views/bookings/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6 offset-lg-3">
+
+      <h1>Edit your booking</h1>
+      <p>Change your details by filling in the form below</p>
+      <%= simple_form_for [ @record, @booking ] do |f| %>
+          <%= f.input :pick_up_date %>
+          <%= f.input :return_date %>
+          <%= link_to "Confirm changes", booking_path(@booking), class: "btn btn-ghost"%>
+      <% end %>
+    </div>
+  </div>
+</div>
