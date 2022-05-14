@@ -1,11 +1,14 @@
 class RecordsController < ApplicationController
   before_action :set_record, only: %i[show destroy update edit]
   def index
-    @records = if params[:query]
-                 Record.where('title LIKE :query OR artist LIKE :query OR genre LIKE :query', query: "%#{params[:query]}%")
-               else
-                 Record.all
-               end
+    if params[:query]
+      search = params[:query].downcase
+      @records = Record.where('lower(title) LIKE :query OR lower(artist) LIKE :query OR lower(genre) LIKE :query', query: "%#{search}%")
+      @title_text = "Showing results for (#{@records.count})"
+    else
+      @records = Record.all
+      @title_text = "All Records (#{@records.count})"
+    end
   end
 
   def show
