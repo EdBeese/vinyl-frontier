@@ -17,5 +17,6 @@
       <p><%= @booking.return_date.strftime("Return on %m/%d/%Y") %> <%=@booking.return_date.strftime("at %I:%M%p")%> </p>
 
       <%= link_to "Back", :back, class: "btn btn-ghost"%>
+      <%= link_to "Edit", edit_booking_path(@booking), class: "btn btn-ghost"%>
     </div>
 </div>
