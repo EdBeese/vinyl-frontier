@@ -8,15 +8,17 @@
     margin-right: 15px;
   }
 
-  a {
-    text-decoration: none;
-  }
 }
 
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
+
+  a {
+    color: black;
+    text-decoration: none; /* no underline */
+  }
 }
 
 // Smallest device

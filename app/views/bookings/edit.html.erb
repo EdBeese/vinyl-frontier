@@ -7,7 +7,7 @@
       <%= simple_form_for [ @record, @booking ] do |f| %>
           <%= f.input :pick_up_date %>
           <%= f.input :return_date %>
-          <%= link_to "Confirm changes", booking_path(@booking), class: "btn btn-ghost"%>
+          <%= f.button :submit, class: "btn btn-ghost" %>
       <% end %>
     </div>
   </div>

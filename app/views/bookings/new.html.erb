@@ -8,7 +8,7 @@
               <%= f.input :pick_up_date %>
               <%= f.input :return_date %>
               <br>
-              <%= link_to "Confirm Booking", bookings_show_path(@record), class: "btn btn-success"%>
+              <%= f.button :submit, class: "btn btn-ghost" %>
             <% end %>
       </div>
     </div>
