@@ -1,0 +1,10 @@
+<%= simple_form_for(@record) do |f| %>
+        <%= f.input :artist %>
+        <%= f.input :title %>
+        <%= f.input :genre %>
+        <%= f.input :year %>
+        <%= f.input :tracks, placeholder: 'separate tracks with \',%\'' %>
+        <%= f.input :about %>
+        <%= f.input :cover, as: :file %>
+        <%= f.submit %>
+      <% end %>
