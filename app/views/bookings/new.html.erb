@@ -1,35 +1,21 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 <h1>Create a Booking</h1>
-
-<h2><%= @records.booking.title %></h2>
-
-=======
->>>>>>> 3df00bfdd6d296f5c345a94008d1d5e42ec4a97e
      <div class="container py-5">
-=======
 <div class="container py-5">
   <h1 class="text-center">Book a record!</h1>
->>>>>>> 8cfb6f96436cff27f973ee68fe1bc364ac0c4272
   <div class="row">
     <div class="col-12 col-md-6 offset-lg-3">
       <div class="bg-white rounded p-3 shadow">
         <h3>Confirm your booking </h3>
         <br>
           <%= simple_form_for [ @record, @booking ] do |f| %>
-              <%= f.input :pick_up_date %>
-              <%= f.input :return_date %>
+              <%= f.input :pick_up_date, as: :date, html5: true %>
+              <%= f.input :return_date, as: :date, html5: true %>
               <br>
-<<<<<<< HEAD
               <%= link_to "Confirm Booking", bookings_show_path(@record), class: "btn btn-success"%>
-=======
               <%= f.button :submit, class: "btn btn-ghost" %>
-<<<<<<< HEAD
->>>>>>> 3df00bfdd6d296f5c345a94008d1d5e42ec4a97e
+
             <% end %>
-=======
-          <% end %>
->>>>>>> 8cfb6f96436cff27f973ee68fe1bc364ac0c4272
+
       </div>
     </div>
   </div>
