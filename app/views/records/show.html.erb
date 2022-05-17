@@ -1,14 +1,17 @@
 <div class="container">
-  <div class="d-flex align-items-center record-main">
-    <div class="flex-item">
+  <div class="row">
+    <%= link_to '<i class="fas fa-angle-left"></i>'.html_safe, :back, class: "back-icon link-secondary"%>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-6">
       <%= cl_image_tag @record.cover.key, alt: "Cover art for #{@record.title} by #{@record.artist}", class: "album-cover"%>
     </div>
-    <div class="record-main-info flex-item">
+    <div class="col-12 col-md-6 col-lg-6">
       <h1 class="record-title"><%= @record.title %></h1>
       <h2 class="record-artist"><%= link_to @record.artist, records_path(query: @record.artist), class: 'text-decoration-none' %></h2>
       <p class="year"><%= @record.year %></p>
-      <p><%= @record.genre.capitalize %></p>
-      <p>Owner: <%= @record.user.first_name %></p>
+      <p><%= link_to @record.genre.capitalize, records_path(query: @record.genre) %></p>
+      <p>Owner: <%= link_to @record.user.first_name, user_path(@record.user) %></p>
       <p>Current Status:
       <%if @record.available%>
         <span class="text-success"><i class="fas fa-record-vinyl"></i>Available</span>
@@ -18,9 +21,27 @@
       </p>
       <p><i class="fas fa-pound-sign"></i><%=@record.price%> per week</p>
       <%= link_to "Book Now", new_record_booking_path(@record), class: "btn btn-success"%>
-      <%= link_to "Back", :back, class: "btn btn-secondary back-btn"%>
     </div>
-    <div class="flex-item">
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-6">
+      <h3>Track List</h3>
+      <ol class="list-group list-group-numbered">
+        <% @tracks.each do |track|  %>
+          <li class="list-group-item"><%= track %></li>
+        <%end%>
+      </ol>
     </div>
+
+    <div class="col-12 col-md-6 col-lg-6">
+      <h3>About the Album</h3>
+      <% if @record.about.present?%>
+        <p class="about"><%= @record.about.html_safe %></p>
+      <%else%>
+        <p>No information.</p>
+      <%end%>
+    </div>
+
   </div>
 </div>

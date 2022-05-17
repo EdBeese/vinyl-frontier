@@ -6,6 +6,7 @@ class BookingsController < ApplicationController
   def index
     @user = current_user
     @bookings = Booking.all
+    @records = Record.where(user: current_user)
   end
 
   def show

@@ -5,6 +5,16 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="input-group">
+      <%= form_tag records_path, method: :get do %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control rounded",
+          placeholder: "Search for artists, albums and genres"
+        %>
+        <%= submit_tag "Search Records", class: "btn btn-primary" %>
+      <% end %>
+    </div>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
@@ -16,6 +26,7 @@
           <li class="nav-item dropdown">
             <%= image_tag "https://cdn-icons-png.flaticon.com/512/812/812680.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <%= link_to current_user.first_name, user_path(current_user), class: "dropdown-item" %>
               <%= link_to "Bookings", bookings_index_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
