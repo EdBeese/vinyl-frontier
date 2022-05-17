@@ -1,3 +1,5 @@
+<h1>Create a Booking</h1>
+     <div class="container py-5">
 <div class="container py-5">
   <h1 class="text-center">Book a record!</h1>
   <div class="row">
@@ -6,11 +8,14 @@
         <h3>Confirm your booking </h3>
         <br>
           <%= simple_form_for [ @record, @booking ] do |f| %>
-              <%= f.input :pick_up_date %>
-              <%= f.input :return_date %>
+              <%= f.input :pick_up_date, as: :date, html5: true %>
+              <%= f.input :return_date, as: :date, html5: true %>
               <br>
+              <%= link_to "Confirm Booking", bookings_show_path(@record), class: "btn btn-success"%>
               <%= f.button :submit, class: "btn btn-ghost" %>
-          <% end %>
+
+            <% end %>
+
       </div>
     </div>
   </div>

@@ -16,10 +16,15 @@
         <p>Renting for <i class="fas fa-pound-sign"></i><%= @booking.record.price%> per week</p>
       <% end %>
 
-      <p><%= @booking.pick_up_date.strftime("Pick up on %m/%d/%Y") %> <%=@booking.pick_up_date.strftime("at %I:%M%p")%></p>
-      <p><%= @booking.return_date.strftime("Return on %m/%d/%Y") %> <%=@booking.return_date.strftime("at %I:%M%p")%> </p>
+      <p><%= @booking.pick_up_date.strftime("Pick up on %m/%d/%Y") %>
+      <p><%= @booking.return_date.strftime("Return on %m/%d/%Y") %>
+      <br>
+      <br>
 
       <%= link_to "Back", :back, class: "btn btn-ghost"%>
       <%= link_to "Edit", edit_booking_path(@booking), class: "btn btn-ghost"%>
+      <%= link_to "Cancel", booking_path(@booking), class: "btn btn-ghost",
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %>
     </div>
 </div>
