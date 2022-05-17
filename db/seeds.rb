@@ -32,12 +32,12 @@ def create_record(album)
     genre: genre,
     year: Date.parse(album.wiki.published).year,
     available: true,
-    user_id: rand(1..User.count),
+    # user_id: rand(8..12),
     tracks: "",
     about: album.wiki.summary,
     price: 3
   )
-
+  new_album.user = User.order('RANDOM()').first
   album.tracks.track.each do |track|
     new_album.tracks << "#{track.name},%"
   end
