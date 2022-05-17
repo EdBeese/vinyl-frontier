@@ -10,6 +10,17 @@ class RecordsController < ApplicationController
     else
       @records = Record.all
     end
+    @users = find_users(@records)
+    @markers = @users.map do |user|
+      # raise
+      {
+        lat: user.latitude,
+        lng: user.longitude
+        # info_window: render_to_string(partial: "info_window", locals: { user: user }),
+        # image_url: helpers.asset_url("hotel_logo.png")
+      }
+      # raise
+    end
   end
 
   def show
@@ -57,6 +68,14 @@ class RecordsController < ApplicationController
   end
 
   private
+
+  def find_users(records)
+    users = []
+    records.each do |record|
+      users.push(record.user)
+    end
+    users.uniq
+  end
 
   def set_record
     @record = Record.find(params[:id])
