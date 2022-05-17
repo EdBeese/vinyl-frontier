@@ -1,2 +1,30 @@
-<h1>Bookings#index</h1>
-<p>Find me in app/views/bookings/index.html.erb</p>
+<div class="container">
+  <h1 class="mb-4">Your Bookings</h1>
+  <div class="row">
+    <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <%= link_to "Library (#{@records.count})", user_path(current_user), class: 'nav-link' %>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Bookings</a>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Edit Profile", edit_user_registration_path(current_user), class: 'nav-link' %>
+    </li>
+  </ul>
+  </div>
+
+  <div class="cards">
+    <% @bookings.each do |booking| %>
+      <%= link_to booking_path(booking) do %>
+        <div class="booking-card">
+          <%= image_tag booking.record.cover, class: "booking-img" %>
+          <div class="booking-info">
+            <h5><%= booking.record.title %></h5>
+            <p><%= "#{booking.pick_up_date.strftime("%d/%m/%Y")} - #{booking.return_date.strftime("%d/%m/%Y")}" %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

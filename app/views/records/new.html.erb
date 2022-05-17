@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <%= link_to '<i class="fas fa-angle-left"></i>'.html_safe, :back, class: "back-icon link-secondary"%>
+    </div>
+    <div class="col-8">
+      <h1>Add a Record to Your Collection</h1>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="row new-content col-md-6 col-sm-12">
+  <%= form_with method: :get do |form| %>
+          <%= form.label "Search for:" %>
+          <%= form.text_field :artist, label: "Artist", value: params[:artist] %>
+          <%= form.text_field :album, label: "Album", value: params[:album] %>
+          <%= form.submit "Search" %>
+
+        <% end %>
+  </div>
+
+
+
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-sm-12">
+      <% if @album && @album.name %>
+        <h3>Search Result</h3>
+        <div class="card d-flex align-items-stretch" style="width: 18rem;">
+          <%= image_tag @album.image[3]['#text'], class: "card-img-top"%>
+          <div class="card-body">
+            <h4 class="card-title record-artist"><%=@album.artist%></h4>
+            <h5 class="record-title"> <%= @album.name %></h5>
+            <%if @album.tags != ""%>
+              <p class="card-text"><%=@album.tags.tag[0].name.capitalize%></p>
+            <%end%>
+            <%= link_to "Save this album", records_path(album: params[:album], artist: params[:artist], lastfm: true ), method: :post %>
+          </div>
+        </div>
+        <% else %>
+        <div class="blank-search">
+          <h3> Search for Your Record or Add Manually</h3>
+        </div>
+      <%end%>
+    </div>
+    <div class="col-sm-6">
+      <h3>Add Manually</h3>
+      <%= render 'form', record: @record%>
+    </div>
+
+  </div>
+
+</div>
