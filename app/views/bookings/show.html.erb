@@ -21,5 +21,8 @@
 
       <%= link_to "Back", :back, class: "btn btn-ghost"%>
       <%= link_to "Edit", edit_booking_path(@booking), class: "btn btn-ghost"%>
+      <%= link_to "Cancel", booking_path(@booking), class: "btn btn-ghost",
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %>
     </div>
 </div>
