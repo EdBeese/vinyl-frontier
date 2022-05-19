@@ -29,10 +29,10 @@
       <div class="row">
         <div class="col-12 col-md-6 offset-lg-3">
           <div class="bg-white rounded p-3 shadow">
-            <h1><%= link_to @booking.record.title, record_path(@booking.record.title), class: 'text-decoration-none' %></h1>
+            <h1><%= link_to @booking.record.title, record_path(@booking.record), class: 'text-decoration-none' %></h1>
               <h3><%= link_to @booking.record.artist, records_path(query: @booking.record.artist), class: 'text-decoration-none' %></h3>
               <p><%= @booking.record.year %></p>
-              <p><%= @booking.record.genre.capitalize %></p>
+              <p><%= @booking.record.genre.titleize %></p>
 
               <% if @booking.record.user.first_name %>
                 <p>Renting from <%= @booking.record.user.first_name.capitalize %>
