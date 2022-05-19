@@ -21,15 +21,21 @@
 //   font-size: 2rem;
 // }
 
-.map-search {
-  display: flex;
-  justify-content: space-around;
-}
+// .map-search {
+//   display: flex;
+//   justify-content: space-around;
+//   flex-direction: column;
+// }
 
 // .artist-link {
 //   color: black;
 //   text-decoration: none;
 // }
+
+.form-content {
+  display: flex;
+  flex-direction: row;
+}
 
 .card-artist-name {
   color: $medium-gray;
