@@ -5,9 +5,19 @@
   }
 }
 
-.year {
-  font-size: 2em;
+.record-info {
+  .year {
+    font-size: 2em;
+  }
+  p {
+    font-size: 1.3em;
+  }
+  a {
+    text-decoration: none;
+  }
 }
+
+
 
 .record-cover {
   background-size: cover;
@@ -22,6 +32,10 @@
 .about {
   text-align: justify;
   text-justify: inter-word;
+}
+
+.second-row {
+  margin-top: 50px;
 }
 
 // .flex {

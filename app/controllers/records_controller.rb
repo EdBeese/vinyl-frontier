@@ -7,19 +7,18 @@ class RecordsController < ApplicationController
   def index
     if params[:query].present?
       @records = Record.record_search(params[:query])
+      @records = Record.where(id: check_near(@records, params[:distance])).record_search(params[:query]) if params[:distance].present?
     else
       @records = Record.all
     end
     @users = find_users(@records)
     @markers = @users.map do |user|
-      # raise
       {
         lat: user.latitude,
-        lng: user.longitude
-        # info_window: render_to_string(partial: "info_window", locals: { user: user }),
-        # image_url: helpers.asset_url("hotel_logo.png")
+        lng: user.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { user: user, records: @records }),
+        image_url: helpers.asset_url("vinyl_icon.png")
       }
-      # raise
     end
   end
 
@@ -30,6 +29,17 @@ class RecordsController < ApplicationController
               else
                 []
               end
+    # There must be a better way to code this
+    @users = []
+    @users.push(User.find(@record.user.id))
+    @markers = @users.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude,
+        info_window: render_to_string(partial: "info_window_show", locals: { user: user }),
+        image_url: helpers.asset_url("vinyl_icon.png")
+      }
+    end
   end
 
   def new
@@ -55,6 +65,10 @@ class RecordsController < ApplicationController
   def edit; end
 
   def update
+    if params[:query] == "change"
+      @record.toggle!(:available)
+      redirect_to record_path(@record), notice: 'Record was successfully updated'
+    end
     if @record.update(record_params)
       redirect_to record_path(@record), notice: 'Record was successfully updated'
     else
@@ -82,7 +96,7 @@ class RecordsController < ApplicationController
   end
 
   def record_params
-    params.require(:record).permit(:title, :artist, :cover, :genre, :year, :available, :price, :lastfm)
+    params.require(:record).permit(:title, :artist, :cover, :genre, :year, :available, :price, :tracks, :about, :available_status)
   end
 
   def get_album(artist, album)
@@ -101,12 +115,12 @@ class RecordsController < ApplicationController
       title: album.name,
       artist: album.artist,
       genre: genre,
-      year: Date.parse(album.wiki.published).year,
       tracks: "",
       about: album.wiki.summary,
       available: true,
       price: 3
     )
+    new_album.year = get_year(album)
     album.tracks.track.each do |track|
       new_album.tracks << "#{track.name},%"
     end
@@ -120,5 +134,22 @@ class RecordsController < ApplicationController
       return tag.name if tag.name !~ /\d/
     end
     return album.tags.tag[0].name
+  end
+
+  def get_year(album)
+    album.tags.tag.each do |tag|
+      return tag.name.to_i if tag.name =~ /^\d{4}$/
+    end
+    return album.tags.tag[0].name
+  end
+
+  # There should surely be an easier way to do this, but it worksß
+  def check_near(records, distance)
+    nearby_users = User.near(current_user, distance)
+    nearby_records = []
+    records.map do |record|
+      nearby_records.push(record.id) if nearby_users.include? record.user
+    end
+    nearby_records
   end
 end
