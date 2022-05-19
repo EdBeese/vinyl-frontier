@@ -50,6 +50,7 @@
               <%= link_to "Cancel", booking_path(@booking), class: "btn-destroy",
                           method: :delete,
                           data: { confirm: "Are you sure?" } %>
+              <%= link_to "Confirm Booking", bookings_index_path, class: "btn btn-ghost" %>
             </div>
           </div>
         </div>
