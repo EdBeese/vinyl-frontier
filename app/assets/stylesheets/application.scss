@@ -6,6 +6,7 @@
 // External libraries
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome";
+@import "mapbox-gl/dist/mapbox-gl";
 
 // Your CSS partials
 @import "components/index";
@@ -13,5 +14,9 @@
 
 
 .logo {
-  font-family: $headers-font
+  font-family: $logo-font;
+}
+
+.container {
+  margin-bottom: 50px;
 }

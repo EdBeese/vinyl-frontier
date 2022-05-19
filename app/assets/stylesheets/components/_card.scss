@@ -10,6 +10,18 @@
 
 }
 
+.text-available {
+  color: $turqoise;
+}
+
+.text-unavailable {
+  color: $faded-red;
+}
+
+.fa-record-vinyl {
+  margin-right: 0.5em;
+}
+
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

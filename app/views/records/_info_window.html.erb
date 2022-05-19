@@ -1,0 +1,14 @@
+<%if user == current_user%>
+  <h5>Your Location</h5>
+<%else%>
+  <h5><%= link_to user.first_name, user_path(user), class: "text-decoration-none" %></h5>
+  <% user_records = @records.where(user: user)%>
+  <ul class="list-group list-group-flush">
+    <% user_records.each do |record| %>
+      <li class="list-group-item">
+        <%= link_to image_tag(record.cover, alt: "#{record.title} cover art", width: 30), record_path(record)%>
+        <%= record.artist %> - <%= link_to record.title, record_path(record), class: "text-decoration-none" %>
+      </li>
+    <% end %>
+  </ul>
+<%end%>

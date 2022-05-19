@@ -30,14 +30,15 @@ def create_record(album)
     title: album.name,
     artist: album.artist,
     genre: genre,
-    year: Date.parse(album.wiki.published).year,
+    # year: Date.parse(album.wiki.published).year,
     available: true,
-    user_id: rand(1..User.count),
+    # user_id: rand(8..12),
     tracks: "",
     about: album.wiki.summary,
     price: 3
   )
-
+  new_album.year = get_year(album)
+  new_album.user = User.order('RANDOM()').first
   album.tracks.track.each do |track|
     new_album.tracks << "#{track.name},%"
   end
@@ -50,6 +51,13 @@ end
 def check_for_genre(album)
   album.tags.tag.each do |tag|
     return tag.name if tag.name !~ /\d/
+  end
+  return album.tags.tag[0].name
+end
+
+def get_year(album)
+  album.tags.tag.each do |tag|
+    return tag.name.to_i if tag.name =~ /^\d{4}$/
   end
   return album.tags.tag[0].name
 end

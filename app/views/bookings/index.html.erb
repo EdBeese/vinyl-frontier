@@ -1,15 +1,15 @@
 <div class="container">
   <h1 class="mb-4">Your Bookings</h1>
   <div class="row">
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs tab-row">
     <li class="nav-item">
-      <%= link_to "Library (#{@records.count})", user_path(current_user), class: 'nav-link' %>
+      <%= link_to "Library (#{@records.count})", user_path(current_user), class: 'nav-link tab' %>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">Bookings</a>
+      <a class="nav-link active tab" aria-current="page" href="#">Bookings</a>
     </li>
     <li class="nav-item">
-      <%= link_to "Edit Profile", edit_user_registration_path(current_user), class: 'nav-link' %>
+      <%= link_to "Edit Profile", edit_user_registration_path(current_user), class: 'nav-link tab' %>
     </li>
   </ul>
   </div>

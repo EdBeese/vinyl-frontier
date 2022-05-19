@@ -10,3 +10,49 @@
   background-color: $turqoise;
   color: white;
 }
+
+.add-btn {
+  padding-left: 16px;
+}
+
+.btn-edit {
+  color: black;
+  background-color: #e9c89d;
+  border: 2px solid black;
+  padding: 10px 15px;
+  font-weight: 600;
+}
+
+.btn-edit:hover {
+  background-color: #E6A046;
+}
+
+.btn-destroy {
+  background-color: #d4ada8;
+  color: black;
+  border: 2px solid black;
+  padding: 10px 15px;
+  font-weight: 600;
+}
+
+.btn-destroy:hover {
+  background-color: #CA503F;
+  color: antiquewhite;
+}
+
+.btn-book {
+  width: 60%;
+  margin-top: 1em;
+}
+
+.btn-grey {
+  color: rgb(163, 163, 163);
+  background-color: white;
+  border: 2px solid rgb(163, 163, 163);
+  padding: 10px 15px;
+  font-weight: 600;
+}
+
+.btn-grey:hover {
+  color: rgb(163, 163, 163);
+}

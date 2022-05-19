@@ -1,22 +1,41 @@
 <div class="container">
   <div class="row">
-    <div class="input-group d-flex justify-content-center col-6">
+    <div class="input-group">
+      <span class="input-group-text">Search</span>
       <%= form_tag records_path, method: :get do %>
         <%= text_field_tag :query,
           params[:query],
           class: "form-control",
-          placeholder: "Search for artists, albums and genres"
+          placeholder: "Artists, albums or genres"
         %>
-        <%= submit_tag "Search Records", class: "btn btn-primary" %>
+        <span class="input-group-text">Distance (miles)</span>
+        <%= number_field_tag :distance,
+          params[:distance],
+          min: 0,
+          class: "form-control"
+        %>
+        <%= submit_tag "Search Records", class: "btn btn-ghost" %>
       <% end %>
     </div>
   </div>
+  <div class="row">
+    <h2 class="results"> Results (<%= @records.count %>)</h2>
+  </div>
+
+  <% if params[:query].present? && params[:query] != "" && @records.count > 0%>
+  <div class="row">
+    <div>
+        <div style="width: 100%; height: 400px;"
+        data-controller="mapbox"
+        data-mapbox-markers-value="<%= @markers.to_json %>"
+        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      </div>
+  </div>
+  <%end%>
 
   <div class="row">
-    <h1 class="results"><%= @title_text %></h1>
-  </div>
-  <div class="row">
     <% @records.each do |record|%>
+    <%unless record.user == current_user%>
     <div class="card col-4 col-lg-3 m-3 d-flex align-items-stretch" style="width: 18rem;">
       <%= image_tag record.cover, class: "card-img-top"%>
       <div class="card-body">
@@ -25,13 +44,13 @@
         <p class="card-text"><%=record.genre.capitalize%></p>
         <p class="card-text">
           <%if record.available%>
-            <span class="text-success"><i class="fas fa-record-vinyl"></i>Available</span>
+            <span class="text-available"><i class="fas fa-record-vinyl"></i>Available</span>
           <%else%>
-            <span class="text-danger"><i class="fas fa-record-vinyl"></i>Unavailable</span>
+            <span class="text-unavailable"><i class="fas fa-record-vinyl"></i>Unavailable</span>
           <%end%>
-          <span class="price"><i class="fas fa-pound-sign"></i><%=record.price%></p></span>
       </div>
     </div>
+    <%end%>
     <% end %>
   </div>
 

@@ -2,17 +2,18 @@
   <h1 class="mb-4">Edit <%= resource_name.to_s.humanize %></h1>
 
     <div class="row">
-      <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <%= link_to "Library (#{current_user.records.count})", user_path(current_user), class: 'nav-link' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Bookings", bookings_path, class: 'nav-link' %>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Edit Profile</a>
-      </li>
-    </ul>
+      <ul class="nav nav-tabs tab-row">
+        <li class="nav-item">
+          <%= link_to "Library (#{current_user.records.count})", user_path(current_user), class: 'nav-link tab' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Bookings", bookings_path, class: 'nav-link tab' %>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active tab" aria-current="page" href="#">Edit Profile</a>
+        </li>
+        </ul>
+    </div>
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= f.error_notification %>
@@ -43,12 +44,12 @@
                   input_html: { autocomplete: "current-password" } %>
     </div>
 
-    <div class="form-actions">
-      <%= f.button :submit, "Update", class: 'btn btn-outline-primary' %>
+    <div class="row form-actions justify-content-around my-5">
+      <%= f.button :submit, "Update", class: 'btn btn-edit col-4' %>
+      <%= link_to "Delete my account", registration_path(resource_name), class: 'btn btn-destroy col-4', data: { confirm: "Are you sure?" }, method: :delete %>
     </div>
   <% end %>
 
-  <p><%= link_to "Delete my account", registration_path(resource_name), class: 'btn btn-danger', data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-  <%= link_to "Back", :back %>
+
 </div>

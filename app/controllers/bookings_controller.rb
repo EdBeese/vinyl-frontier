@@ -2,7 +2,6 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
   before_action :set_record, only: [:new, :create]
 
-
   def index
     @user = current_user
     @bookings = Booking.all
@@ -20,6 +19,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.record = @record
     @booking.user = current_user
+    @booking.return_date = @booking.pick_up_date + 1.week
     if @booking.save
       redirect_to booking_path(@booking)
     else
