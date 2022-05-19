@@ -1,15 +1,35 @@
 
 <div class="container">
+  <div class="row">
+    <%= link_to '<i class="fas fa-angle-left"></i>'.html_safe, :back, class: "back-icon link-secondary"%>
+  </div>
   <div class="d-flex justify-content-center align-items-center">
     <h1 class="text-center p-3">Your Booking</h1>
     <p></p>
+  </div>
+
+
+
+  <%# <div class="card" style="width: 50rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div> %>
+
+
+    <%# <div class="col-12 col-md-4 col-lg-4">
+      <%= cl_image_tag @booking.record.cover.key, alt: "Cover art for #{@booking.record.title} by #{@booking.record.artist}", class: "album-cover"%>
+    <%# </div> %>
 
   </div>
     <div class="container py-5">
       <div class="row">
         <div class="col-12 col-md-6 offset-lg-3">
           <div class="bg-white rounded p-3 shadow">
-            <h1><%= link_to @booking.record.title, records_path(query: @booking.record.title), class: 'text-decoration-none' %></h1>
+            <h1><%= link_to @booking.record.title, record_path(@booking.record.title), class: 'text-decoration-none' %></h1>
               <h3><%= link_to @booking.record.artist, records_path(query: @booking.record.artist), class: 'text-decoration-none' %></h3>
               <p><%= @booking.record.year %></p>
               <p><%= @booking.record.genre.capitalize %></p>
@@ -25,9 +45,9 @@
               <br>
               <br>
 
-              <%= link_to "Back", :back, class: "btn btn-ghost"%>
-              <%= link_to "Edit", edit_booking_path(@booking), class: "btn btn-ghost"%>
-              <%= link_to "Cancel", booking_path(@booking), class: "btn btn-ghost",
+              <%# <%= link_to "Back", :back, class: "btn btn-ghost"%>
+              <%= link_to "Edit", edit_booking_path(@booking), class: "btn-edit"%>
+              <%= link_to "Cancel", booking_path(@booking), class: "btn-destroy",
                           method: :delete,
                           data: { confirm: "Are you sure?" } %>
             </div>
