@@ -5,10 +5,10 @@
   <div class="row">
     <div class="col-12 col-md-6 offset-lg-3">
       <div class="bg-white rounded p-3 shadow">
-        <h3>Confirm your booking </h3>
-        <br>
+        <h3> Confirm your booking </h3>
           <%= simple_form_for [ @record, @booking ] do |f| %>
-              <%= f.date_field :pick_up_date, min: Date.today, max: Date.today + 1.week, as: :date, html5: true %>
+              <%= f.date_field :pick_up_date, min: Date.today, max: Date.today + 1.week, as: :date, html5: true, class: "text-center" %>
+              <br>
               <br>
               <%= f.button :submit, class: "btn btn-ghost" %>
 
