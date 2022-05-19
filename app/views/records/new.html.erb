@@ -1,35 +1,31 @@
 <div class="container">
   <div class="row">
     <div class="col-2">
-      <%= link_to '<i class="fas fa-angle-left"></i>'.html_safe, :back, class: "back-icon link-secondary"%>
+      <%= link_to '<i class="fas fa-angle-left"></i>'.html_safe, user_path(current_user), class: "back-icon link-secondary"%>
     </div>
-    <div class="col-8">
-      <h1>Add a Record to Your Collection</h1>
+    <div class="row">
+      <div class="col-8 mb-4">
+        <h1>Add a Record to Your Collection</h1>
+      </div>
     </div>
+
 
   </div>
 
-
-
-
-
-  <div class="row new-content col-md-6 col-sm-12">
-  <%= form_with method: :get do |form| %>
-          <%= form.label "Search for:" %>
-          <%= form.text_field :artist, label: "Artist", value: params[:artist] %>
-          <%= form.text_field :album, label: "Album", value: params[:album] %>
-          <%= form.submit "Search" %>
+  <div class="row justify-content-between">
+    <div class="col-md-5 col-sm-12">
+      <%= form_with method: :get do |form| %>
+          <%= form.text_field :artist, label: "Artist", value: params[:artist], placeholder: "Artist" %>
+          <%= form.text_field :album, label: "Album", value: params[:album], placeholder: "Album Title" %>
+          <%= form.submit "Search", class: "btn btn-ghost py-1"%>
 
         <% end %>
-  </div>
-
-
-
-  <div class="row justify-content-center">
-    <div class="col-md-6 col-sm-12">
-      <% if @album && @album.name %>
-        <h3>Search Result</h3>
-        <div class="card d-flex align-items-stretch" style="width: 18rem;">
+      <div class="search-box mt-4">
+        <% if @album.present? && @album == "Error when trying to fetch album information" %>
+          <h3>Sorry - there were no results for this search</h3>
+        <% elsif @album.present? && @album.name.present? %>
+        <h3 class="pb-4">Search Result</h3>
+        <div class="card d-flex align-items-stretch m-auto" style="width: 18rem;">
           <%= image_tag @album.image[3]['#text'], class: "card-img-top"%>
           <div class="card-body">
             <h4 class="card-title record-artist"><%=@album.artist%></h4>
@@ -37,7 +33,7 @@
             <%if @album.tags != ""%>
               <p class="card-text"><%=@album.tags.tag[0].name.capitalize%></p>
             <%end%>
-            <%= link_to "Save this album", records_path(album: params[:album], artist: params[:artist], lastfm: true ), method: :post %>
+            <%= link_to "Save this album", records_path(album: params[:album], artist: params[:artist], lastfm: true ), class: "btn btn-ghost", method: :post %>
           </div>
         </div>
         <% else %>
@@ -45,8 +41,10 @@
           <h3> Search for Your Record or Add Manually</h3>
         </div>
       <%end%>
+      </div>
+
     </div>
-    <div class="col-sm-6">
+    <div class="col-md-5 col-sm-12">
       <h3>Add Manually</h3>
       <%= render 'form', record: @record%>
     </div>

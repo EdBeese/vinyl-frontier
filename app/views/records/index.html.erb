@@ -1,59 +1,57 @@
 <div class="container">
   <div class="row">
-    <div class="input-group d-flex justify-content-center col-6">
+    <div class="input-group">
+      <span class="input-group-text">Search</span>
       <%= form_tag records_path, method: :get do %>
         <%= text_field_tag :query,
           params[:query],
           class: "form-control",
-          placeholder: "Search for artists, albums and genres"
+          placeholder: "Artists, albums or genres"
         %>
-        <%= submit_tag "Search Records", class: "btn btn-primary" %>
+        <span class="input-group-text">Distance (miles)</span>
+        <%= number_field_tag :distance,
+          params[:distance],
+          min: 0,
+          class: "form-control"
+        %>
+        <%= submit_tag "Search Records", class: "btn btn-ghost" %>
       <% end %>
     </div>
   </div>
   <div class="row">
-    <h1 class="results"> Results (<%= @records.count %>)</h1>
+    <h2 class="results"> Results (<%= @records.count %>)</h2>
   </div>
 
+  <% if params[:query].present? && params[:query] != "" && @records.count > 0%>
   <div class="row">
     <div>
-        <div style="width: 100%; height: 500px;"
+        <div style="width: 100%; height: 400px;"
         data-controller="mapbox"
         data-mapbox-markers-value="<%= @markers.to_json %>"
         data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
       </div>
   </div>
+  <%end%>
 
   <div class="row">
-    <div class="container">
-      <div class="row">
-      <div class="col-12 col-lg-8">
-        <% @records.each do |record|%>
-      <div class="card col-4 col-lg-3 m-3 d-flex align-items-stretch" style="width: 18rem;">
-        <%= image_tag record.cover, class: "card-img-top"%>
-        <div class="card-body">
-          <h4 class="card-title record-artist"><%=record.artist%></h4>
-          <h5 class="record-title"> <%= link_to record.title, record_path(record), class: 'link-primary text-decoration-none' %></h5>
-          <p class="card-text"><%=record.genre.capitalize%></p>
-          <p class="card-text">
-            <%if record.available%>
-              <span class="text-success"><i class="fas fa-record-vinyl"></i>Available</span>
-            <%else%>
-              <span class="text-danger"><i class="fas fa-record-vinyl"></i>Unavailable</span>
-            <%end%>
-        </div>
-      </div>
-      <% end %>
-      </div>
-      <div class="col-4">
-        <div style="width: 100%; height: 600px;"
-        data-controller="mapbox"
-        data-mapbox-markers-value="<%= @markers.to_json %>"
-        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+    <% @records.each do |record|%>
+    <%unless record.user == current_user%>
+    <div class="card col-4 col-lg-3 m-3 d-flex align-items-stretch" style="width: 18rem;">
+      <%= image_tag record.cover, class: "card-img-top"%>
+      <div class="card-body">
+        <h4 class="card-title record-artist"><%=record.artist%></h4>
+        <h5 class="record-title"> <%= link_to record.title, record_path(record), class: 'link-primary text-decoration-none' %></h5>
+        <p class="card-text"><%=record.genre.capitalize%></p>
+        <p class="card-text">
+          <%if record.available%>
+            <span class="text-available"><i class="fas fa-record-vinyl"></i>Available</span>
+          <%else%>
+            <span class="text-unavailable"><i class="fas fa-record-vinyl"></i>Unavailable</span>
+          <%end%>
       </div>
     </div>
-
-    </div>
+    <%end%>
+    <% end %>
   </div>
 
 </div>
