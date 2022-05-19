@@ -1,12 +1,15 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-md-6 offset-lg-3">
+  </div>
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-12 col-md-6 offset-lg-3">
+          <div class="bg-white rounded p-3 shadow">
 
       <h1>Edit your booking</h1>
       <p>Change your details by filling in the form below</p>
       <%= simple_form_for [ @record, @booking ] do |f| %>
-          <%= f.input :pick_up_date %>
-          <%= f.input :return_date %>
+              <%= f.date_field :pick_up_date, min: Date.today, max: Date.today + 1.week, as: :date, html5: true, class: "text-center" %>
+              <br>
+              <br>
           <%= f.button :submit, class: "btn btn-ghost" %>
       <% end %>
     </div>
