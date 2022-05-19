@@ -1,48 +1,79 @@
-.record-main-info {
-  padding-right: 20px;
-  h1 {
-    font-size: 3rem;
+// .record-main-info {
+//   padding-right: 20px;
+//   h1 {
+//     font-size: 3rem;
+//   }
+// }
+
+// .record-info {
+//   .year {
+//     font-size: 2em;
+//   }
+//   p {
+//     font-size: 1.3em;
+//   }
+//   a {
+//     text-decoration: none;
+//   }
+// }
+
+
+
+// .record-cover {
+//   background-size: cover;
+//   height: 20vh;
+//   width: 20vh;
+//   color: #eee;
+//   text-align: center;
+//   padding-top: 40vh;
+//   background-color: black;
+// }
+
+// .about {
+//   text-align: justify;
+//   text-justify: inter-word;
+// }
+
+// .second-row {
+//   margin-top: 50px;
+// }
+
+// // .flex {
+// //   justify-content: space-between;
+// // 	align-items: center;
+// // }
+
+// .back-btn {
+//   float: right;
+// }
+
+.record-show-content {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  p {
+    font-size: 13px;
+  }
+
+  ol li {
+    font-size: 13px;
   }
 }
 
 .record-info {
-  .year {
-    font-size: 2em;
-  }
+  margin-bottom: 20px;;
+}
+
+.booking_info {
+  margin-bottom: 20px;
+
   p {
-    font-size: 1.3em;
+    margin: 0;
+    font-size: 16px;
   }
-  a {
-    text-decoration: none;
-  }
+
 }
 
-
-
-.record-cover {
-  background-size: cover;
-  height: 20vh;
-  width: 20vh;
-  color: #eee;
+.record-page-map {
   text-align: center;
-  padding-top: 40vh;
-  background-color: black;
-}
-
-.about {
-  text-align: justify;
-  text-justify: inter-word;
-}
-
-.second-row {
-  margin-top: 50px;
-}
-
-// .flex {
-//   justify-content: space-between;
-// 	align-items: center;
-// }
-
-.back-btn {
-  float: right;
 }
