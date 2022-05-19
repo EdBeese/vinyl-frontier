@@ -1,0 +1,12 @@
+.nav-link{
+  color: black;
+  padding: 10px 15px;
+  font-weight: 600;
+}
+
+.nav-pills .nav-link.active {
+  color: white;
+  background-color: $turqoise;
+  text-decoration: none;
+  border: 2px solid black;
+}
