@@ -23,8 +23,8 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.record = @record
     @booking.user = current_user
-    @booking.return_date = @booking.pick_up_date + 1.week
-    @record.toggle!(:available)
+    @booking.return_date = @booking.pick_up_date + 1.week unless @booking.pick_up_date.nil?
+    @record.toggle!(:available) if @record.available == true
     if @booking.save
       redirect_to booking_path(@booking)
     else
