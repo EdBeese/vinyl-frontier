@@ -67,7 +67,7 @@ class RecordsController < ApplicationController
   def update
     if params[:query] == "change"
       @record.toggle!(:available)
-      redirect_to record_path(@record), notice: 'Record was successfully updated'
+      redirect_to record_path(@record), notice: 'Record was successfully updated' and return
     end
     if @record.update(record_params)
       redirect_to record_path(@record), notice: 'Record was successfully updated'
