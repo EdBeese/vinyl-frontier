@@ -9,7 +9,6 @@
         <br>
           <%= simple_form_for [ @record, @booking ] do |f| %>
               <%= f.date_field :pick_up_date, min: Date.today, max: Date.today + 1.week, as: :date, html5: true %>
-              <%= f.date_field :return_date, as: :date, html5: true %>
               <br>
               <%= f.button :submit, class: "btn btn-ghost" %>
 
