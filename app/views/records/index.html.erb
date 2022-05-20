@@ -1,27 +1,34 @@
 <div class="container">
-  <div class="row">
-    <div class="input-group">
-      <span class="input-group-text">Search</span>
-      <%= form_tag records_path, method: :get do %>
-        <%= text_field_tag :query,
-          params[:query],
-          class: "form-control",
-          placeholder: "Artists, albums or genres"
-        %>
-        <span class="input-group-text">Distance (miles)</span>
-        <%= number_field_tag :distance,
-          params[:distance],
-          min: 0,
-          class: "form-control"
-        %>
-        <%= submit_tag "Search Records", class: "btn btn-ghost" %>
-      <% end %>
+
+  <%# SEARCH BAR %>
+  <div class="search-bar">
+    <div class="row">
+      <div class="input-group">
+        <span class="input-group-text">Search</span>
+        <%= form_tag records_path, method: :get, class: 'form-content' do %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Artists, albums or genres"
+          %>
+          <span class="input-group-text">Distance (miles)</span>
+          <%= number_field_tag :distance,
+            params[:distance],
+            min: 0,
+            class: "form-control"
+          %>
+          <%= submit_tag "Search Records", class: "btn btn-ghost" %>
+        <% end %>
+      </div>
     </div>
   </div>
+
+  <%# RESULTS HEADING %>
   <div class="row">
     <h2 class="results"> Results (<%= @records.count %>)</h2>
   </div>
 
+  <%# MAP %>
   <% if params[:query].present? && params[:query] != "" && @records.count > 0%>
   <div class="row">
     <div>
@@ -33,26 +40,29 @@
   </div>
   <%end%>
 
+<%# CARDS %>
   <div class="row">
-    <% @records.each do |record|%>
-    <%unless record.user == current_user%>
-
-    <div class="card col-4 col-lg-3 m-3 d-flex align-items-stretch" style="width: 18rem;">
-      <%= link_to image_tag(record.cover, alt: "#{record.title} cover art", width: 265), record_path(record)%>
-      <div class="card-body">
-        <h4 class="card-title record-artist"><%=record.artist%></h4>
-        <h5 class="record-title"> <%= link_to record.title, record_path(record), class: 'link-primary text-decoration-none' %></h5>
-        <p class="card-text"><%=record.genre.capitalize%></p>
-        <p class="card-text">
-          <%if record.available == false%>
-            <span class="text-unavailable"><i class="fas fa-record-vinyl"></i>Unavailable</span>
-          <%else%>
-            <span class="text-available"><i class="fas fa-record-vinyl"></i>Available</span>
-          <%end%>
-      </div>
+    <div class="record-cards">
+      <% @records.each do |record|%>
+        <%unless record.user == current_user%>
+        <div class="record-card col-4 col-lg-3 m-3">
+          <%= link_to image_tag(record.cover, alt: "#{record.title} cover art", width: 250), record_path(record)%>
+          <div class="card-info">
+            <h2><%=record.title%></h4>
+            <div class="card-info-bottom">
+            <p> <%= link_to record.artist, record_path(record), class: 'card-artist-name' %></p>
+               <p><%if record.available%>
+                    <span class="text-available">Available <i class="fas fa-record-vinyl"></i></span>
+                  <%else%>
+                    <span class="text-unavailable"></i>Unavailable <i class="fas fa-record-vinyl"></span>
+                  <%end%>
+              </p>
+            </div>
+          </div>
+        </div>
+        <%end%>
+      <% end %>
     </div>
-    <% end %>
-    <% end %>
   </div>
 
   <%# <div class="row">
