@@ -13,7 +13,7 @@
 
 
 // RECORD CARD
-.card-artist-name {
+.card-sub-text {
   color: $medium-gray;
   text-decoration: none;
 
@@ -57,6 +57,10 @@
 .card-info-bottom {
   display: flex;
   justify-content: space-between;
+}
+
+.card-actions {
+
 }
 
 .text-available {

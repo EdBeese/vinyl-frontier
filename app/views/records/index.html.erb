@@ -50,7 +50,7 @@
           <div class="card-info">
             <h2><%=record.title%></h4>
             <div class="card-info-bottom">
-            <p> <%= link_to record.artist, record_path(record), class: 'card-artist-name' %></p>
+            <p> <%= link_to record.artist, record_path(record), class: 'card-sub-text' %></p>
                <p><%if record.available%>
                     <span class="text-available">Available <i class="fas fa-record-vinyl"></i></span>
                   <%else%>
