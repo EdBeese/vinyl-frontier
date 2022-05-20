@@ -1,8 +1,7 @@
 <div class="container">
-  <div class="">
+
   <%# SEARCH BAR %>
     <div class="row search-bar">
-      <div class="">
         <%= form_tag records_path, method: :get, class: 'form-content' do %>
           <%= text_field_tag :query,
             params[:query],
@@ -20,8 +19,6 @@
           <% end %>
         <% end %>
       </div>
-    </div>
- </div>
 
 <%# RESULTS HEADING %>
   <div class="row">
