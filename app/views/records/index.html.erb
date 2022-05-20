@@ -49,10 +49,10 @@
           <div class="card-info">
             <h2><%= link_to record.title, record_path(record)%></h2>
             <div class="card-info-bottom">
-              <p> <%= link_to record.artist, record_path(record), class: 'card-sub-text' %></p>
+              <p> <%= link_to record.artist, records_path(query: record.artist), class: 'card-sub-text' %></p>
             </div>
             <div class="card-info-bottom">
-              <p class="card-sub-text"><%=record.genre.capitalize%></p>
+              <p class="card-sub-text"><%=link_to record.genre.capitalize, records_path(query: record.genre)%></p>
             </div>
             <div class="card-info-bottom">
               <p>
