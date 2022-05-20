@@ -6,16 +6,16 @@
   <% if @user == current_user %>
   <div class="row tab-row-user">
     <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link active tab" aria-current="page" href="#">Library (<%= @records.count %>)</a>
-    </li>
-    <li class="nav-item">
-      <%= link_to "Bookings", bookings_path, class: 'nav-link tab' %>
-    </li>
-    <li class="nav-item">
-      <%= link_to "Edit Profile", edit_user_registration_path(current_user), class: 'nav-link tab' %>
-    </li>
-  </ul>
+      <li class="nav-item">
+        <a class="nav-link active tab" aria-current="page" href="#">Library (<%= @records.count %>)</a>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Bookings", bookings_path, class: 'nav-link tab' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Edit Profile", edit_user_registration_path(current_user), class: 'nav-link tab' %>
+      </li>
+    </ul>
   </div>
 
   <div class="row add-btn">
@@ -24,29 +24,31 @@
   <% end %>
 
   <div class="row">
+    <div class="record-cards">
+
     <% @records.each do |record|%>
-    <div class="card col-4 col-lg-3 m-3 d-flex align-items-stretch" style="width: 18rem;">
-      <%= image_tag record.cover, class: "card-img-top"%>
-      <div class="card-body">
-        <h4 class="card-title record-artist"><%=record.artist%></h4>
-        <h5 class="record-title"> <%= link_to record.title, record_path(record), class: 'link-primary text-decoration-none' %></h5>
-        <p class="card-text"><%=record.genre.capitalize%></p>
-        <p class="card-text">
-          <%if record.available == false%>
-            <span class="text-unavailable"><i class="fas fa-record-vinyl"></i>Unavailable</span>
-          <%else%>
-            <span class="text-available"><i class="fas fa-record-vinyl"></i>Available</span>
-          <%end%>
-          <% if @user == current_user %>
-          <div class="row justify-content-around">
-            <%= link_to "Edit", edit_record_path(record), class: 'btn btn-edit col-5' %>
-            <%= link_to "Delete", record_path(record), class: 'btn btn-destroy col-5', method: :delete, data: {confirm: "Delete #{record.title} from your library"} %>
-          </div>
-          <%end%>
+      <div class="record-card col-4 col-lg-3 m-3">
+        <%= link_to image_tag(record.cover, alt: "#{record.title} cover art", width: 250), record_path(record)%>
+        <div class="card-body">
+          <h4 class="card-title record-artist"><%=record.artist%></h4>
+          <h5 class="record-title"> <%= link_to record.title, record_path(record), class: 'link-primary text-decoration-none' %></h5>
+          <p class="card-text"><%=record.genre.capitalize%></p>
+          <p class="card-text">
+            <%if record.available == false%>
+              <span class="text-unavailable"><i class="fas fa-record-vinyl"></i>Unavailable</span>
+            <%else%>
+              <span class="text-available"><i class="fas fa-record-vinyl"></i>Available</span>
+            <%end%>
+            <% if @user == current_user %>
+            <div class="row justify-content-around">
+              <%= link_to "Edit", edit_record_path(record), class: 'btn btn-edit col-5' %>
+              <%= link_to "Delete", record_path(record), class: 'btn btn-destroy col-5', method: :delete, data: {confirm: "Delete #{record.title} from your library"} %>
+            </div>
+            <%end%>
+        </div>
       </div>
-    </div>
     <% end %>
   </div>
-
+</div>
 
 </div>
