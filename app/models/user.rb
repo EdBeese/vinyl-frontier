@@ -8,6 +8,7 @@ class User < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_postcode?
   has_many :records, dependent: :destroy
   has_many :bookings, dependent: :destroy
+  has_many :messages, dependent: :destroy
   # validates :first_name, presence: true
   # validates :last_name, presence: true
   # validates :address_line_one, presence: true

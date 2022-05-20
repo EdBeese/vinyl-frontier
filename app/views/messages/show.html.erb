@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <%= link_to '<i class="fas fa-angle-left"></i>'.html_safe, :back, class: "back-icon link-secondary"%>
+  </div>
+  <div class="row justify-content-center mt-5">
+    <div class="col-12 col-md-8 col-sm-6">
+      <div class="card">
+        <h5 class="card-header">Booking Alert</h5>
+        <div class="card-body">
+          <h5 class="card-title"><%= @message.title %></h5>
+          <p class="card-text"><%= @message.content %></p>
+          <%= link_to "Manage Booking", booking_path(@message.booking), class:"btn btn-ghost" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -47,6 +47,7 @@ class BookingsController < ApplicationController
     @booking.return_date = @booking.pick_up_date + 1.week unless @booking.pick_up_date.nil?
     @record.toggle!(:available) if @record.available == true
     if @booking.save
+      new_booking_notification(@booking)
       redirect_to booking_path(@booking)
     else
       render :new
@@ -57,8 +58,12 @@ class BookingsController < ApplicationController
   end
 
   def update
-    @booking.update(booking_params)
-    redirect_to booking_path(@booking)
+    if @booking.update(booking_params)
+      edit_booking_notification(@booking)
+      redirect_to booking_path(@booking), notice: 'Booking was successfully updated'
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -80,5 +85,26 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+
+  def new_booking_notification(booking)
+    message = Message.new(
+      title: "New Loan Request",
+      content: "#{booking.user.first_name} has requested to borrow #{booking.record.title} on #{booking.pick_up_date.to_date}.  View the booking to make edits or cancel."
+    )
+    message.user = booking.record.user
+    message.booking = booking
+    message.save!
+  end
+
+  def edit_booking_notification(booking)
+    message = Message.new(
+      title: "#{current_user.first_name} Has Amended a Loan Request",
+      content: "#{booking.user.first_name} has requested to amend their booking and change the pickup date to
+      #{booking.record.title} on #{booking.pick_up_date.strftime('%I:%M %p')}.  View the booking to make edits or cancel."
+    )
+    message.user = booking.record.user
+    message.booking = booking
+    message.save!
   end
 end
