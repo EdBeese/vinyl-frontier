@@ -6,7 +6,7 @@
           <%= text_field_tag :query,
             params[:query],
             class: "search-term-input",
-            placeholder: "Artists, albums or genres"
+            placeholder: "Type artists, albums or genres..."
           %>
           <%= number_field_tag :distance,
             params[:distance],
@@ -36,7 +36,6 @@
       </div>
   </div>
   <%end%>
-<%# <%= link_to image_tag(record.cover, alt: "#{record.title} cover art", width: 30), record_path(record)%>
 
 <%# CARDS %>
   <div class="row">
