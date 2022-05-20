@@ -1,22 +1,23 @@
 <div class="container">
-  <div class="search-bar">
+  <div class="">
   <%# SEARCH BAR %>
-    <div class="row">
-      <div class="input-group">
-        <span class="input-group-text">Search</span>
+    <div class="row search-bar">
+      <div class="">
         <%= form_tag records_path, method: :get, class: 'form-content' do %>
           <%= text_field_tag :query,
             params[:query],
-            class: "form-control",
+            class: "search-term-input",
             placeholder: "Artists, albums or genres"
           %>
-          <span class="input-group-text">Distance (miles)</span>
           <%= number_field_tag :distance,
             params[:distance],
             min: 0,
-            class: "form-control"
+            class: "search-distance-input",
+            placeholder: "Distance (miles)"
           %>
-          <%= submit_tag "Search Records", class: "btn btn-ghost" %>
+          <%= button_tag(type: "submit", class: "submit-search") do %>
+            <i class="fas fa-search"></i>
+          <% end %>
         <% end %>
       </div>
     </div>

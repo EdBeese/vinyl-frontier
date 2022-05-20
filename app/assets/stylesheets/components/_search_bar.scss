@@ -7,12 +7,39 @@
 
 
 .search-bar {
-  margin-top: 10px;
-  border: 5px solid red;
-  padding: 0px
+  display: flex;
+  // justify-content: center;
+  // box-sizing: none;
 }
 
 .form-content {
-  display: flex;
-  flex-direction: row;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: center;
+  // position: relative;
+  // width: 190px;
+  // height: 30px;
+}
+
+.search-term-input {
+  width: 400px;
+  border-radius: 15px 0px  0px 15px;
+  border: 0.3px $charcoal-gray solid;
+  padding: 5px 5px 5px 25px;
+}
+
+.search-distance-input {
+  width: 150px;
+  border: none;
+  border-top: 0.3px solid black;
+  border-bottom: 0.3px solid black;
+
+  padding: 5px 5px 5px 15px;
+}
+
+.submit-search {
+    border: 0.3px $charcoal-gray solid;
+    border-radius: 0px 15px 15px 0px;
+    background-color: white;
+    padding: 5px 15px;
 }
