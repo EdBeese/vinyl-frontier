@@ -56,3 +56,25 @@
 .btn-grey:hover {
   color: rgb(163, 163, 163);
 }
+
+.btn-turquoise {
+  color: white;
+  background-color: $turqoise;
+  font-weight: lighter;
+
+  &:hover {
+    color: white;
+    background-color: $faded-red;
+  }
+}
+
+.btn-yellow {
+  color: white;
+  background-color: $turqoise;
+  font-weight: lighter;
+
+  &:hover {
+    color: white;
+    background-color: $faded-red;
+  }
+}
