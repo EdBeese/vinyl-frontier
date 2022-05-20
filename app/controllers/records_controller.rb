@@ -124,7 +124,7 @@ class RecordsController < ApplicationController
     album.tracks.track.each do |track|
       new_album.tracks << "#{track.name},%"
     end
-    cover = URI.open(album.image[3]['#text'])
+    cover = URI.open(album.image[4]['#text'])
     new_album.cover.attach(io: cover, filename: album.name, content_type: "image/png")
     new_album
   end
