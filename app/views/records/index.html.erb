@@ -42,28 +42,54 @@
 
 <%# CARDS %>
   <div class="row">
+    <% @records.each do |record|%>
+    <div class="card col-4 col-lg-3 m-3 d-flex align-items-stretch" style="width: 18rem;">
+      <%= link_to image_tag(record.cover, alt: "#{record.title} cover art", width: 265), record_path(record)%>
+      <div class="card-body">
+        <h4 class="card-title record-artist"><%=record.artist%></h4>
+        <h5 class="record-title"> <%= link_to record.title, record_path(record), class: 'link-primary text-decoration-none' %></h5>
+        <p class="card-text"><%=record.genre.capitalize%></p>
+        <p class="card-text">
+          <%if record.available == false%>
+            <span class="text-unavailable"><i class="fas fa-record-vinyl"></i>Unavailable</span>
+          <%else%>
+            <span class="text-available"><i class="fas fa-record-vinyl"></i>Available</span>
+          <%end%>
+          <% if @user == current_user %>
+          <div class="row justify-content-around">
+            <%= link_to "Edit", edit_record_path(record), class: 'btn btn-edit col-5' %>
+            <%= link_to "Delete", record_path(record), class: 'btn btn-destroy col-5', method: :delete, data: {confirm: "Delete #{record.title} from your library"} %>
+          </div>
+          <%end%>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <%# <div class="row">
     <div class="record-cards">
       <% @records.each do |record|%>
-        <%unless record.user == current_user%>
-        <div class="record-card col-4 col-lg-3 m-3">
-          <%= link_to image_tag(record.cover, alt: "#{record.title} cover art", width: 250), record_path(record)%>
-          <div class="card-info">
-            <h2><%=record.title%></h4>
-            <div class="card-info-bottom">
-            <p> <%= link_to record.artist, record_path(record), class: 'card-artist-name' %></p>
-               <p><%if record.available%>
-                    <span class="text-available">Available <i class="fas fa-record-vinyl"></i></span>
-                  <%else%>
-                    <span class="text-unavailable"></i>Unavailable <i class="fas fa-record-vinyl"></span>
-                  <%end%>
-              </p>
-            </div>
-          </div>
-        </div>
-        <%end%>
-      <% end %>
-    </div>
-  </div>
+        <%# <%unless record.user == current_user%>
+        <%# <div class="record-card col-4 col-lg-3 m-3"> %>
+          <%# <%= link_to image_tag(record.cover, alt: "#{record.title} cover art", width: 250), record_path(record)%>
+          <%# <div class="card-info"> %>
+            <%# <h2><%=record.title</h4>  %>
+            <%# <div class="card-info-bottom"> %>
+            <%# <p> <%= link_to record.artist, record_path(record), class: 'card-artist-name'</p>  %>
+               <%# <p><%if record.available%>
+                    <%# <span class="text-available">Available <i class="fas fa-record-vinyl"></i></span> %>
+                  <%# <%else%>
+                    <%# <span class="text-unavailable"></i>Unavailable <i class="fas fa-record-vinyl"></span> %>
+                  <%# <%end%>
+              <%# </p> %>
+            <%# </div> %>
+          <%# </div> %>
+        <%# </div> %>
+        <%# <%end%>
+      <%# <% end %>
+    <%# </div>
+  </div> %>
+
 
 
 
