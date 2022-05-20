@@ -2,7 +2,8 @@ class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :destroy]
 
   def index
-    @messages = Message.where(user: current_user).order(:created_at)
+    @from_time = Time.now
+    @messages = Message.where(user: current_user).order('created_at DESC')
   end
 
   def show

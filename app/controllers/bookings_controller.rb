@@ -59,7 +59,8 @@ class BookingsController < ApplicationController
 
   def update
     if @booking.update(booking_params)
-      edit_booking_notification(@booking)
+      edit_booking_notification(@booking, @booking.user)
+      edit_booking_notification(@booking, @booking.record.user)
       redirect_to booking_path(@booking), notice: 'Booking was successfully updated'
     else
       render :edit
@@ -97,13 +98,13 @@ class BookingsController < ApplicationController
     message.save!
   end
 
-  def edit_booking_notification(booking)
+  def edit_booking_notification(booking, user)
     message = Message.new(
       title: "#{current_user.first_name} Has Amended a Loan Request",
-      content: "#{booking.user.first_name} has requested to amend their booking and change the pickup date to
-      #{booking.record.title} on #{booking.pick_up_date.strftime('%I:%M %p')}.  View the booking to make edits or cancel."
+      content: "#{booking.user.first_name} has requested to amend their booking for #{booking.record.title} and change the pickup to
+      #{booking.pick_up_date.to_date} at #{booking.pick_up_date.strftime('%I:%M %p')}.  View the booking to make edits or cancel."
     )
-    message.user = booking.record.user
+    message.user = user
     message.booking = booking
     message.save!
   end
