@@ -57,6 +57,8 @@
   color: rgb(163, 163, 163);
 }
 
+
+// DIFFERENT BUTTON COLOURS
 .btn-turquoise {
   color: white;
   background-color: $turqoise;
@@ -76,5 +78,16 @@
   &:hover {
     color: white;
     background-color: $faded-red;
+  }
+}
+
+.btn-red {
+  color: white;
+  background-color: $faded-red;
+  font-weight: lighter;
+
+  &:hover {
+    color: white;
+    background-color: $turqoise;
   }
 }
