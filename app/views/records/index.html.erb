@@ -44,25 +44,31 @@
   <div class="row">
     <div class="record-cards">
       <% @records.each do |record|%>
-        <%unless record.user == current_user%>
         <div class="record-card col-4 col-lg-3 m-3">
           <%= link_to image_tag(record.cover, alt: "#{record.title} cover art", width: 250), record_path(record)%>
           <div class="card-info">
-            <h2><%=record.title%></h4>
+            <h2><%= link_to record.title, record_path(record)%></h2>
             <div class="card-info-bottom">
-            <p> <%= link_to record.artist, record_path(record), class: 'card-artist-name' %></p>
-               <p><%if record.available%>
-                    <span class="text-available">Available <i class="fas fa-record-vinyl"></i></span>
-                  <%else%>
-                    <span class="text-unavailable"></i>Unavailable <i class="fas fa-record-vinyl"></span>
-                  <%end%>
+              <p> <%= link_to record.artist, record_path(record), class: 'card-sub-text' %></p>
+            </div>
+            <div class="card-info-bottom">
+              <p class="card-sub-text"><%=record.genre.capitalize%></p>
+            </div>
+            <div class="card-info-bottom">
+              <p>
+                <%if record.available == false%>
+                  <span class="text-unavailable">Unavailable <i class="fas fa-record-vinyl"></i></span>
+                <%else%>
+                  <span class="text-available">Available <i class="fas fa-record-vinyl"></i></span>
+                <%end%>
               </p>
+
             </div>
           </div>
         </div>
-        <%end%>
       <% end %>
     </div>
+  </div>
   </div>
 
   <%# <div class="row">
