@@ -84,7 +84,6 @@
 }
 
 .booking-info-links {
-
   &:hover {
     color: $dark-green;
   }
@@ -92,4 +91,12 @@
 
 .record-artist {
   font-weight: normal;
+}
+
+.year {
+  margin: 0;
+}
+
+.genre {
+  margin: 0;
 }

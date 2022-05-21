@@ -6,12 +6,12 @@
     <div class="col-12 col-lg-7 record-info">
       <h1 class="record-title"><%= @record.title %></h1>
       <h3 class="record-artist"><%= link_to @record.artist, records_path(query: @record.artist), class: 'text-decoration-none' %></h2>
-      <% if false %>
+      <div class="year-and-genre">
         <p class="year"><%= @record.year %></p>
-        <p><%= link_to @record.genre.capitalize, records_path(query: @record.genre) %></p>
-      <% end %>
+        <p><%= link_to @record.genre.capitalize, records_path(query: @record.genre), class: 'genre' %></p>
+      </div>
       <div class="booking_info">
-        <p><strong></strong>Owner: <%= link_to @record.user.first_name, user_path(@record.user) %> - <%= Geocoder::Calculations.distance_between(@record.user, current_user).round(2) %> miles away</p>
+        <p>Owner: <%= link_to @record.user.first_name, user_path(@record.user) %> - <%= Geocoder::Calculations.distance_between(@record.user, current_user).round(2) %> miles away</p>
 
         <%if @record.user == current_user%>
           <%if @record.available%>
