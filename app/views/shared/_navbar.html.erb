@@ -11,12 +11,12 @@
     <%# RIGHT HAND SIDE ACTIONS %>
     <div class="navbar-actions">
       <%# SEARCH BAR %>
-      <div class="nav-search-bar">
+      <div class="nav-search-bar mt-1">
         <%= form_tag records_path, method: :get, class: 'form-content' do %>
           <%= text_field_tag :query,
             params[:query],
             class: "nav-search-input",
-            placeholder: "Search"
+            placeholder: "Search..."
           %>
           <%= button_tag(type: "submit", class: "submit-search") do %>
             <i class="fas fa-search"></i>
@@ -30,7 +30,7 @@
           <% if user_signed_in? %>
             </li>
             <li class="nav-item">
-              <%= link_to "Browse", records_path(@record), class: "nav-link" %>
+              <%= link_to "Browse", records_path(@record), class: "navbar-link" %>
             </li>
             <li class="nav-item dropdown">
               <%= image_tag "https://cdn-icons-png.flaticon.com/512/812/812680.png", class: "avatar dropdown-toggle icon-class", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>

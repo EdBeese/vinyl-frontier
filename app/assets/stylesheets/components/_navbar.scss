@@ -12,6 +12,7 @@
 
 .navbar-lewagon .logo {
   font-size: 30px;
+  padding-top: 0px;
 }
 
 .input-group {
@@ -41,7 +42,7 @@
   border-top: 0.3px $charcoal-gray solid;
   border-bottom: 0.3px $charcoal-gray solid;
   border-left: 0.3px $charcoal-gray solid;
-border-right: 0px;
+  border-right: 0px;
   padding: 5px 5px 5px 25px;
 }
 
@@ -49,5 +50,35 @@ border-right: 0px;
 .navbar-actions {
   display:flex;
   flex-direction: row;
+  margin: 0px;
+  justify-content: center;
+}
 
+.navbar-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-family: 'neue-kabel';
+  // // color: #0D6EFD;
+  // text-decoration: none;
+  // transition: color 0.15s ease-in-out, text-decoration 0.15s ease-in-out;
+  // display: inline-block;
+
+  &:hover {
+    color: $turqoise;
+  }
+
+  &:after {
+    content: '';
+    width: 0px;
+    height: 1px;
+    display: block;
+    background: $turqoise;
+    transition: 300ms;
+  }
+
+  &:hover:after {
+    text-decoration: underline;
+    color: $turqoise;
+    width: 100%;
+  }
 }
