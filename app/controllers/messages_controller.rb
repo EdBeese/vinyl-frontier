@@ -21,7 +21,6 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @booking.record = @record
     @message = Message.new
     @message.user = if @booking.user == current_user
                       @booking.record.user
