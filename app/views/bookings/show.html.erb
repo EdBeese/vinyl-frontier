@@ -48,6 +48,7 @@
               <%# <%= link_to "Back", :back, class: "btn btn-ghost"%>
 
               <div class="row justify-content-around">
+                <%= link_to "Send Message", new_booking_message_path(@message), class: "btn-edit col-5"%>
                 <%= link_to "Edit", edit_booking_path(@booking), class: "btn-edit col-5"%>
                 <%= link_to "Cancel", booking_path(@booking), class: "btn-destroy col-5",
                             method: :delete,
