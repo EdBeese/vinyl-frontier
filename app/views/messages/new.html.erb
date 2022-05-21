@@ -1,13 +1,16 @@
 <div class="container">
-  <div class="row">
-    <h2 class="col-12 col-md-6 col-lg-6">Send a Message</h2>
+  <div class="row justify-content-center mt-5">
+    <h3 class="col-12 col-md-6 col-lg-6 ms-3">Send a Message about Booking for <%= @booking.record.title %></h3>
   </div>
 
-  <div class="row col-12 col-md-6 col-lg-6">
-    <%= simple_form_for(@message) do |f| %>
-        <%= f.input :content %>
-        <%= f.submit class: "btn btn-ghost" %>
-      <% end %>
+  <div class="row justify-content-center">
+    <div class="row col-12 col-md-6 col-lg-6">
+      <%= simple_form_for [ @booking, @message ] do |f| %>
+          <%= f.input :content %>
+          <%= f.submit class: "btn btn-ghost" %>
+        <% end %>
+    </div>
   </div>
+
 
 </div>
