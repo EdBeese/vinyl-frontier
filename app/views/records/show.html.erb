@@ -11,7 +11,7 @@
         <p><%= link_to @record.genre.capitalize, records_path(query: @record.genre) %></p>
       <% end %>
       <div class="booking_info">
-        <p>Owner: <%= link_to @record.user.first_name, user_path(@record.user) %> - <%= Geocoder::Calculations.distance_between(@record.user, current_user).round(2) %> miles away</p>
+        <p><strong></strong>Owner: <%= link_to @record.user.first_name, user_path(@record.user) %> - <%= Geocoder::Calculations.distance_between(@record.user, current_user).round(2) %> miles away</p>
 
         <%if @record.user == current_user%>
           <%if @record.available%>
