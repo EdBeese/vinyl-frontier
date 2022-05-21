@@ -23,14 +23,18 @@
 
 .record-cards {
   display: grid;
-  //   grid-gap: 16px;
-  // // flex-grow: 1;
-  // padding: 16px;
+  grid-gap: 16px;
+  flex-grow: 1;
+  padding: 16px;
 
   h2 {
     font-size: 18px;
     margin-top: 8px;
     margin-bottom: 0px;
+
+    &:hover {
+      color: $faded-red;
+    }
   }
 
   p {
@@ -44,7 +48,7 @@
   // box-shadow: 0 0 10px rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
-  width: 150px;
+  // width: 150px;
 }
 
 .card-info {
@@ -58,6 +62,14 @@
   justify-content: space-between;
 }
 
+.card-artist-name {
+  color: $medium-gray;
+  text-decoration: none;
+
+  &:hover {
+    color: $turqoise;
+  }
+}
 .card-actions {
 
 }
@@ -102,7 +114,7 @@
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
   .record-cards {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr ;
   }
 }
 
@@ -116,6 +128,6 @@
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
   .record-cards {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
