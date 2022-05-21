@@ -3,6 +3,10 @@
   display: flex;
   justify-content: flex-start;
 
+  &:hover {
+    color: $dark-green;
+  }
+
   .booking-img {
     height: 72px;
     border-radius: 10px;
@@ -17,7 +21,7 @@
   text-decoration: none;
 
   &:hover {
-    color: $turqoise;
+    color: $dark-green;
   }
 }
 
@@ -33,7 +37,7 @@
     margin-bottom: 0px;
 
     &:hover {
-      color: $faded-red;
+      color: $dark-green;
     }
   }
 
@@ -67,7 +71,7 @@
   text-decoration: none;
 
   &:hover {
-    color: $turqoise;
+    color: $dark-green;
   }
 }
 .card-actions {
@@ -75,11 +79,11 @@
 }
 
 .text-available {
-  color: $turqoise;
+  color: $dark-green;
 }
 
 .text-unavailable {
-  color: $faded-red;
+  color: $dark-green;
 }
 
 .fa-record-vinyl {

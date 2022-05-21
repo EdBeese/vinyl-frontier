@@ -82,4 +82,13 @@
 
 .booking-info {
   height: 400px;
+
+}
+
+.booking-info-links {
+
+  &:hover {
+    color: $dark-green;
+  }
+
 }
