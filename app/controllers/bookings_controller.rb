@@ -14,6 +14,7 @@ class BookingsController < ApplicationController
 
   def show
     redirect_to root_path unless @booking.user == current_user || @booking.record.user == current_user
+    @record = @booking.record
     @users = []
     @users.push(@booking.record.user)
     @markers = @users.map do |user|

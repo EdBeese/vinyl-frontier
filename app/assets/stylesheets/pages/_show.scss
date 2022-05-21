@@ -52,9 +52,7 @@
   margin-bottom: 20px;
 
   p {
-    font-size: 15px;
-    text-align: justify;
-
+    font-size: 13px;
   }
 
   ol li {
@@ -91,4 +89,6 @@
     color: $dark-green;
   }
 
+.record-artist {
+  font-weight: normal;
 }
