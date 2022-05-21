@@ -86,16 +86,16 @@
   margin-right: 0.5em;
 }
 
-// .cards {
-//   display: grid;
-//   grid-template-columns: 1fr 1fr 1fr;
-//   grid-gap: 16px;
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
 
-//   a {
-//     color: black;
-//     text-decoration: none; /* no underline */
-//   }
-// }
+  a {
+    color: black;
+    text-decoration: none; /* no underline */
+  }
+}
 
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {
