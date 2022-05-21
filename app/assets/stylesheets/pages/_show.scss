@@ -52,9 +52,7 @@
   margin-bottom: 20px;
 
   p {
-    font-size: 15px;
-    text-align: justify;
-
+    font-size: 13px;
   }
 
   ol li {
@@ -82,4 +80,15 @@
 
 .booking-info {
   height: 400px;
+
+}
+
+.booking-info-links {
+
+  &:hover {
+    color: $dark-green;
+  }
+
+.record-artist {
+  font-weight: normal;
 }

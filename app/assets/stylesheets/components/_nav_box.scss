@@ -2,6 +2,10 @@
   color: black;
   padding: 10px 15px;
   font-weight: 600;
+
+  &:hover {
+    color: $dark-green;
+  }
 }
 
 .nav-pills .nav-link.active {
