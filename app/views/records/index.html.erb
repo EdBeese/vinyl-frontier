@@ -41,7 +41,6 @@
   <div class="row">
     <div class="record-cards">
       <% @records.each do |record|%>
-        <%if record.user != current_user%>
         <div class="record-card  m-3">
           <%= link_to image_tag(record.cover, alt: "#{record.title} cover art", width: 250), record_path(record)%>
           <div class="card-info">
@@ -65,7 +64,6 @@
             </div>
           </div>
         </div>
-        <%end %>
       <% end %>
     </div>
   </div>
