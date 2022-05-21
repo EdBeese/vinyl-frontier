@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :records do
     resources :bookings, only: [ :new, :create ]
   end
-  resources :bookings, only: [ :index, :show, :edit, :update, :destroy ]
+  resources :bookings, only: [ :index, :show, :edit, :update, :destroy ] do
+    resources :messages, only: [ :new, :create ]
+  end
   resources :messages, only: [:index, :show, :destroy]
 end

@@ -78,6 +78,18 @@
   text-align: center;
 }
 
+.booking-info {
+  height: 400px;
+
+}
+
+.booking-info-links {
+
+  &:hover {
+    color: $dark-green;
+  }
+}
+
 .record-artist {
   font-weight: normal;
 }

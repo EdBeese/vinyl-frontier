@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :destroy]
+  before_action :set_booking, only: [:new, :create]
 
   def index
     @from_time = Time.now
@@ -15,9 +16,35 @@ class MessagesController < ApplicationController
     redirect_to messages_path
   end
 
+  def new
+    @message = Message.new
+  end
+
+  def create
+    @message = Message.new
+    @message.user = if @booking.user == current_user
+                      @booking.record.user
+                    else
+                      @booking.user
+                    end
+    if @message.save
+      redirect_to booking_path(@booking)
+    else
+      render :new
+    end
+  end
+
   private
+
+  def message_params
+    params.require(:message).permit(:title, :content)
+  end
 
   def set_message
     @message = Message.find(params[:id])
+  end
+
+  def set_booking
+    @booking = Booking.find(params[:booking_id])
   end
 end
