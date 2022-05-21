@@ -17,3 +17,14 @@
 .input-group {
   justify-content: center;
 }
+
+.badge-notification {
+  line-height: 20px !important;
+  width: 20px !important;
+  padding: 0 !important;
+  background: #D73B3A !important;
+  position: relative !important;
+  top: -50px !important;
+  right: -30px !important;
+  border-radius: 50%;
+}

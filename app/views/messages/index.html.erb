@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="col-12 col-md-8 col-lg-6">
+    <h1 class="mb-4">Alerts (<%= @messages.where(read: false).count %>)</h1>
+  </div>
+  <div class="row tab-row-user">
+    <ul class="nav nav-tabs">
+    <li class="nav-item">
+          <%= link_to "Library (#{current_user.records.count})", user_path(current_user), class: 'nav-link tab' %>
+        </li>
+    <li class="nav-item">
+      <a class="nav-link active tab" aria-current="page" href="#">Alerts (<%= current_user.messages.where(read: false).count %>)</a>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Bookings", bookings_path, class: 'nav-link tab' %>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Edit Profile", edit_user_registration_path(current_user), class: 'nav-link tab' %>
+    </li>
+  </ul>
+  </div>
+  <div class="row justify-content-center mt-5">
+
+
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <ol class="list-group list-group">
+      <% @messages.each do |message| %>
+      <% dif = @from_time - message.created_at %>
+        <li class="list-group-item d-flex justify-content-between align-items-start shadow message-card">
+        <div class="ms-2 me-auto">
+          <div class="time"><%= distance_of_time_in_words(@from_time, @from_time + dif) %> ago</div>
+          <%if message.read == false%>
+            <div class="ms-5 me-auto">
+              <div class="p-3 fw-bold">
+                <span class="badge bg-primary rounded-pill text-primary me-3">.</span>
+                <%= link_to message.title, message_path(message) %></div>
+            </div>
+          <%else%>
+            <div class="ms-2 me-auto ms-5">
+              <div class="p-3">
+              <span class="badge bg-blank rounded-pill text-primary me-3">.</span>
+              <%= link_to message.title, message_path(message) %></div>
+            </div>
+          <%end%>
+        </div>
+          <p></p>
+
+
+
+        </li>
+      <%end%>
+      </ol>
+    </div>
+
+  </div>
+
+</div>

@@ -6,6 +6,9 @@
       <%= link_to "Library (#{@records.count})", user_path(current_user), class: 'nav-link tab' %>
     </li>
     <li class="nav-item">
+      <%= link_to "Alerts (#{current_user.messages.where(read: false).count})", messages_path(current_user), class: 'nav-link tab' %>
+    </li>
+    <li class="nav-item">
       <a class="nav-link active tab" aria-current="page" href="#">Bookings</a>
     </li>
     <li class="nav-item">
