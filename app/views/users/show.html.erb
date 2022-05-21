@@ -40,9 +40,7 @@
             <div class="card-info-bottom">
               <p> <%= link_to record.artist, record_path(record), class: 'card-sub-text' %></p>
             </div>
-            <div class="card-info-bottom">
-              <p class="card-sub-text"><%=record.genre.capitalize%></p>
-            </div>
+            <p class="card-sub-text"><%=record.genre.capitalize%></p>
             <div class="card-info-bottom">
               <p>
                 <%if record.available == false%>
