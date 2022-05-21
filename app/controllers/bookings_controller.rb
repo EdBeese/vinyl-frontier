@@ -3,8 +3,8 @@ class BookingsController < ApplicationController
   before_action :set_record, only: [:new, :create]
 
   def index
-    @records = Record.where(user: current_user)
-    @bookings_borrowing = Booking.where(user: current_user)
+    @records = Record.where(user: current_user).order(:pick_up_date)
+    @bookings_borrowing = Booking.where(user: current_user).order(:pick_up_date)
     @bookings_loaning = Booking.all.select { |booking| booking.record.user.id == current_user.id }
     @bookings_borrowing_current = @bookings_borrowing.select { |booking| booking.return_date > Date.today }
     @bookings_borrowing_past = @bookings_borrowing.select { |booking| booking.return_date < Date.today }
@@ -13,10 +13,31 @@ class BookingsController < ApplicationController
   end
 
   def show
+    redirect_to root_path unless @booking.user == current_user || @booking.record.user == current_user
+    @users = []
+    @users.push(@booking.record.user)
+    @markers = @users.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { user: user }),
+        image_url: helpers.asset_url("vinyl_icon.png")
+      }
+    end
   end
 
   def new
     @booking = Booking.new
+    @users = []
+    @users.push(@record.user)
+    @markers = @users.map do |user|
+      {
+        lat: user.latitude,
+        lng: user.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { user: user }),
+        image_url: helpers.asset_url("vinyl_icon.png")
+      }
+    end
   end
 
   def create
@@ -43,6 +64,7 @@ class BookingsController < ApplicationController
   def destroy
     @record = @booking.record
     @booking.destroy
+    @record.toggle!(:available) if @record.available == false
     redirect_to record_path(@record)
   end
 
