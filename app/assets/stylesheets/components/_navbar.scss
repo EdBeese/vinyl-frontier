@@ -20,6 +20,7 @@
 }
 
 .badge-notification {
+  // height: 25px;
   line-height: 20px !important;
   width: 20px !important;
   padding: 0 !important;
@@ -30,14 +31,19 @@
   border-radius: 50%;
 }
 
-.nav-search-bar {
-
+.nav-submit-search {
+  // height: 25px;
+  border: 0.3px $charcoal-gray solid;
+  border-radius: 0px 15px 15px 0px;
+  background-color: white;
+  padding: 5px 15px;
+  color: $charcoal-gray;
 }
 
 .nav-search-input {
   font-size: 15px;
   width: 150px;
-  height: 40px;
+
   border-radius: 15px 0px  0px 15px;
   border-top: 0.3px $charcoal-gray solid;
   border-bottom: 0.3px $charcoal-gray solid;
