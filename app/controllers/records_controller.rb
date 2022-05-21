@@ -6,10 +6,10 @@ class RecordsController < ApplicationController
   before_action :set_record, only: %i[show destroy update edit]
   def index
     if params[:query].present?
-      @records = Record.record_search(params[:query])
-      @records = Record.where(id: check_near(@records, params[:distance])).record_search(params[:query]) if params[:distance].present?
+      @records = Record.record_search(params[:query]).where.not(user: current_user)
+      @records = Record.where(id: check_near(@records, params[:distance])).record_search(params[:query]).where.not(user: current_user) if params[:distance].present?
     else
-      @records = Record.all
+      @records = Record.all.where.not(user: current_user)
     end
     @users = find_users(@records)
     @markers = @users.map do |user|

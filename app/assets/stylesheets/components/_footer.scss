@@ -1,0 +1,32 @@
+.footer {
+  background: $dark-grey;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  padding: -8px 50px;
+  color: rgba(0,0,0,0.3);
+  border-top: 2px solid black;
+}
+.footer-links {
+  background: $dark-grey;
+  align-items: center;
+  text-align:center;
+  padding-top: 24px;
+  padding-bottom:24px;
+  width: 100%;
+}
+.footer-links a {
+  color: $off-white;
+  opacity: 0.15;
+  text-decoration: none;
+  font-size: 24px;
+  padding: 0px 10px;
+}
+.footer-links a:hover {
+  opacity: 1;
+  color: $beige;
+}
+
+.footer-links ul {
+  margin-top: 16px;
+}
