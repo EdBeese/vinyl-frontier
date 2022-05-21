@@ -1,4 +1,14 @@
 
+<div class="container">
+  <div class="row">
+    <%= link_to '<i class="fas fa-angle-left"></i>'.html_safe, :back, class: "back-icon link-secondary"%>
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <h1 class="text-center p-3">Your Booking</h1>
+    <p></p>
+  </div>
+
+
 
   <%# <div class="card" style="width: 50rem;">
   <img class="card-img-top" src="..." alt="Card image cap">
@@ -14,80 +24,47 @@
       <%= cl_image_tag @booking.record.cover.key, alt: "Cover art for #{@booking.record.title} by #{@booking.record.artist}", class: "album-cover"%>
     <%# </div> %>
 
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="bg-white rounded p-3 shadow booking-info">
+            <h1><%= link_to @booking.record.title, record_path(@booking.record), class: 'text-decoration-none' %></h1>
+              <h3><%= link_to @booking.record.artist, records_path(query: @booking.record.artist), class: 'text-decoration-none' %></h3>
+
+              <% if @booking.record.user.first_name %>
+                <p>Rented By <%= link_to @booking.user.first_name.capitalize, user_path(@booking.user) %></p>
+                <p>Renting from <%= link_to @booking.record.user.first_name.capitalize, user_path(@booking.record.user) %>
+              <% else %>
+                <p>Renting for <i class="fas fa-pound-sign"></i><%= @booking.record.price%> per week</p>
+              <% end %>
+
+              <p><%= @booking.pick_up_date.strftime("Pick up on %d/%m/%Y") %> </p>
+              <%if @booking.pick_up_date.hour > 0%>
+                <p><%= @booking.pick_up_date.strftime("At %I:%M%p") %>  </p>
+              <%end%>
+              <p><%= @booking.return_date.strftime("Return on %m/%d/%Y") %>  </p>
 
 
-<%# <%= link_to "Back", :back, class: "btn btn-ghost"%>
+              <%# <%= link_to "Back", :back, class: "btn btn-ghost"%>
 
-<div class="container record-show-content">
-  <div class="row">
-    <div class="col-12 col-lg-6">
-      <%= cl_image_tag @record.cover.key, alt: "Cover art for #{@record.title} by #{@record.artist}", class: "album-cover"%>
-    </div>
-    <div class="col-12 col-lg-6 record-info">
-      <h1 class="record-title"><%= @record.title %></h1>
-      <h3 class="record-artist"><%= link_to @record.artist, records_path(query: @record.artist), class: 'text-decoration-none' %></h2>
-      <% if false %>
-        <p class="year"><%= @record.year %></p>
-        <p><%= link_to @record.genre.capitalize, records_path(query: @record.genre) %></p>
-      <% end %>
-      <div class="booking_info">
-        <p>Owner: <%= link_to @record.user.first_name, user_path(@record.user) %> - <%= Geocoder::Calculations.distance_between(@record.user, current_user).round(2) %> miles away</p>
+              <div class="row justify-content-around">
+                <%= link_to "Edit", edit_booking_path(@booking), class: "btn-edit col-3"%>
+                <%= link_to "Cancel", booking_path(@booking), class: "btn-destroy col-3",
+                            method: :delete,
+                            data: { confirm: "Are you sure?" } %>
+              </div>
 
-        <%if @record.user == current_user%>
-          <%if @record.available%>
-            <span class="text-available"><i class="fas fa-record-vinyl"></i><%= link_to "Mark As Unavailable", record_path(@record, query: "change"), method: :patch %></span>
-          <%else%>
-            <span class="text-unavailable"><i class="fas fa-record-vinyl"></i><%= link_to "Mark As Available", record_path(@record, query: "change"), method: :patch %></span>
-          <%end%>
 
-        <%else%>
-          <p>Current Status:
-          <%if @record.available%>
-            <span class="text-available"><i class="fas fa-record-vinyl"></i>Available</span>
-          <%else%>
-            <span class="text-unavailable"><i class="fas fa-record-vinyl"></i>Unavailable</span>
-          <%end%>
-        <%end%>
-        </p>
-        <%if @record.user == current_user%>
-          <div class="row justify-content-evenly show-btns">
-            <%= link_to "Delete", record_path(@record), class: 'btn btn-destroy col-4', method: :delete, data: {confirm: "Delete #{@record.title} from your library"} %>
-            <%= link_to "Edit", edit_record_path(@record), class: 'btn btn-edit col-4 me-5' %>
+            </div>
           </div>
-        <%elsif @record.available == true%>
-          <%= link_to "Book Now", new_record_booking_path(@record), class: "btn btn-ghost btn-book"%>
-        <%else%>
-          <button type="button" class="btn btn-grey" disabled>Book Now</button>
-        <%end%>
+          <div class="col-12 col-md-6">
+            <div class="record-page-map">
+              <div style="width: 100%; height: 400px;"
+              data-controller="mapbox"
+              data-mapbox-markers-value="<%= @markers.to_json %>"
+              data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div>
-        <h3>About the Album</h3>
-        <% if @record.about.present?%>
-          <p class="about"><%= @record.about.html_safe %></p>
-        <%else%>
-          <p>No information.</p>
-        <%end%>
-      </div>
-
-      <div>
-        <h3>Track List</h3>
-        <ol class="list-group list-group-numbered">
-          <% @tracks.each do |track|  %>
-            <li class="list-group-item"><%= track %></li>
-          <%end%>
-        </ol>
-      </div>
-
     </div>
-    <div class="record-page-map">
-      <h2>Pick-up location</h2>
-      <div style="width: 100%; height: 400px;"
-      data-controller="mapbox"
-      data-mapbox-markers-value="<%= @markers.to_json %>"
-      data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-    </div>
-
-  </div>
-
-</div>
