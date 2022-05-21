@@ -35,9 +35,9 @@
             <%= link_to "Edit", edit_record_path(@record), class: 'btn btn-edit col-4 me-5' %>
           </div>
         <%elsif @record.available == true%>
-          <%= link_to "Book Now", new_record_booking_path(@record), class: "btn btn-ghost btn-book"%>
+          <%= link_to "Book Now", new_record_booking_path(@record), class: "btn btn-turquoise btn-book"%>
         <%else%>
-          <button type="button" class="btn btn-grey" disabled>Book Now</button>
+          <button type="button" class="btn btn-turquoise" disabled>Book Now</button>
         <%end%>
       </div>
 
