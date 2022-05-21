@@ -10,6 +10,9 @@
       <a class="nav-link active tab" aria-current="page" href="#">Library (<%= @records.count %>)</a>
     </li>
     <li class="nav-item">
+      <%= link_to "Alerts (#{@new_messages})", messages_path(current_user), class: 'nav-link tab' %>
+    </li>
+    <li class="nav-item">
       <%= link_to "Bookings", bookings_path, class: 'nav-link tab' %>
     </li>
     <li class="nav-item">

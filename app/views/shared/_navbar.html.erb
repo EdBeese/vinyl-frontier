@@ -24,10 +24,14 @@
             <%= link_to "Browse Records", records_path(@record), class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
-            <%= image_tag "https://cdn-icons-png.flaticon.com/512/812/812680.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <%= image_tag "https://cdn-icons-png.flaticon.com/512/812/812680.png", class: "avatar dropdown-toggle icon-class", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <%if current_user.messages.where(read: false).count > 0 %>
+              <span class="badge-notification badge"><%= current_user.messages.where(read: false).count %></span>
+            <% end %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to current_user.first_name, user_path(current_user), class: "dropdown-item" %>
               <%= link_to "Bookings", bookings_index_path, class: "dropdown-item" %>
+              <%= link_to "Alerts (#{current_user.messages.where(read: false).count})", messages_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
           </li>
