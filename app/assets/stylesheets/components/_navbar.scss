@@ -28,3 +28,26 @@
   right: -30px !important;
   border-radius: 50%;
 }
+
+.nav-search-bar {
+
+}
+
+.nav-search-input {
+  font-size: 15px;
+  width: 150px;
+  height: 40px;
+  border-radius: 15px 0px  0px 15px;
+  border-top: 0.3px $charcoal-gray solid;
+  border-bottom: 0.3px $charcoal-gray solid;
+  border-left: 0.3px $charcoal-gray solid;
+border-right: 0px;
+  padding: 5px 5px 5px 25px;
+}
+
+
+.navbar-actions {
+  display:flex;
+  flex-direction: row;
+
+}
