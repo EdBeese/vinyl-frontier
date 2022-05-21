@@ -21,12 +21,15 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new
+    @message = Message.new(message_params)
+    @message.title = @booking.record.title
+    @message.booking = @booking
     @message.user = if @booking.user == current_user
                       @booking.record.user
                     else
                       @booking.user
                     end
+                    # raise
     if @message.save
       redirect_to booking_path(@booking)
     else
@@ -37,7 +40,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:title, :content)
+    params.require(:message).permit(:content)
   end
 
   def set_message
