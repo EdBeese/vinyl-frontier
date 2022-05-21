@@ -1,30 +1,70 @@
 
 <div class="container">
+  <div class="row">
+    <%= link_to '<i class="fas fa-angle-left"></i>'.html_safe, :back, class: "back-icon link-secondary"%>
+  </div>
   <div class="d-flex justify-content-center align-items-center">
-    <h1 class="text-center">Your Booking</h1>
+    <h1 class="text-center p-3">Your Booking</h1>
     <p></p>
   </div>
-  <div>
-      <h1><%= @booking.record.title %></h1>
-      <h3><%= link_to @booking.record.artist, records_path(query: @booking.record.artist), class: 'text-decoration-none' %></h3>
-      <p><%= @booking.record.year %></p>
-      <p><%= @booking.record.genre.capitalize %></p>
 
-      <% if @booking.user.first_name %>
-        <p>Renting from <%= @booking.user.first_name %> for <i class="fas fa-pound-sign"></i><%= @booking.record.price%> per week</p>
-      <% else %>
-        <p>Renting for <i class="fas fa-pound-sign"></i><%= @booking.record.price%> per week</p>
-      <% end %>
 
-      <p><%= @booking.pick_up_date.strftime("Pick up on %m/%d/%Y") %>
-      <p><%= @booking.return_date.strftime("Return on %m/%d/%Y") %>
-      <br>
-      <br>
 
-      <%= link_to "Back", :back, class: "btn btn-ghost"%>
-      <%= link_to "Edit", edit_booking_path(@booking), class: "btn btn-ghost"%>
-      <%= link_to "Cancel", booking_path(@booking), class: "btn btn-ghost",
-                  method: :delete,
-                  data: { confirm: "Are you sure?" } %>
+  <%# <div class="card" style="width: 50rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div> %>
+
+
+    <%# <div class="col-12 col-md-4 col-lg-4">
+      <%= cl_image_tag @booking.record.cover.key, alt: "Cover art for #{@booking.record.title} by #{@booking.record.artist}", class: "album-cover"%>
+    <%# </div> %>
+
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="bg-white rounded p-3 shadow booking-info">
+            <h1><%= link_to @booking.record.title, record_path(@booking.record), class: 'text-decoration-none' %></h1>
+              <h3><%= link_to @booking.record.artist, records_path(query: @booking.record.artist), class: 'text-decoration-none' %></h3>
+
+              <% if @booking.record.user.first_name %>
+                <p>Rented By <%= link_to @booking.user.first_name.capitalize, user_path(@booking.user) %></p>
+                <p>Renting from <%= link_to @booking.record.user.first_name.capitalize, user_path(@booking.record.user) %>
+              <% else %>
+                <p>Renting for <i class="fas fa-pound-sign"></i><%= @booking.record.price%> per week</p>
+              <% end %>
+
+              <p><%= @booking.pick_up_date.strftime("Pick up on %d/%m/%Y") %> </p>
+              <%if @booking.pick_up_date.hour > 0%>
+                <p><%= @booking.pick_up_date.strftime("At %I:%M%p") %>  </p>
+              <%end%>
+              <p><%= @booking.return_date.strftime("Return on %m/%d/%Y") %>  </p>
+
+
+              <%# <%= link_to "Back", :back, class: "btn btn-ghost"%>
+
+              <div class="row justify-content-around">
+                <%= link_to "Edit", edit_booking_path(@booking), class: "btn-edit col-3"%>
+                <%= link_to "Cancel", booking_path(@booking), class: "btn-destroy col-3",
+                            method: :delete,
+                            data: { confirm: "Are you sure?" } %>
+              </div>
+
+
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="record-page-map">
+              <div style="width: 100%; height: 400px;"
+              data-controller="mapbox"
+              data-mapbox-markers-value="<%= @markers.to_json %>"
+              data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
