@@ -7,6 +7,9 @@
           <%= link_to "Library (#{current_user.records.count})", user_path(current_user), class: 'nav-link tab' %>
         </li>
         <li class="nav-item">
+          <%= link_to "Alerts (#{current_user.messages.where(read: false).count})", messages_path(current_user), class: 'nav-link tab' %>
+        </li>
+        <li class="nav-item">
           <%= link_to "Bookings", bookings_path, class: 'nav-link tab' %>
         </li>
         <li class="nav-item">

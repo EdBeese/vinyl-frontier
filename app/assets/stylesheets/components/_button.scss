@@ -25,6 +25,7 @@
 
 .btn-edit:hover {
   background-color: #E6A046;
+  color: black;
 }
 
 .btn-destroy {
@@ -55,4 +56,45 @@
 
 .btn-grey:hover {
   color: rgb(163, 163, 163);
+}
+
+
+// DIFFERENT BUTTON COLOURS
+.btn-turquoise {
+  color: white;
+  background-color: $turqoise;
+  font-weight: lighter;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+
+
+  &:hover {
+    color: white;
+    background-color: $faded-red;
+  }
+}
+
+.btn-yellow {
+  color: white;
+  background-color: $faded-yellow;
+  font-weight: lighter;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+
+
+  &:hover {
+    color: white;
+    background-color: $faded-red;
+  }
+}
+
+.btn-red {
+  color: white;
+  background-color: $faded-red;
+  font-weight: lighter;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+
+
+  &:hover {
+    color: white;
+    background-color: $turqoise;
+  }
 }

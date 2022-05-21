@@ -1,75 +1,78 @@
-<div class="container">
-  <div class="row">
-    <%= link_to '<i class="fas fa-angle-left"></i>'.html_safe, :back, class: "back-icon link-secondary"%>
-  </div>
-  <div class="row">
+<div class="container record-show-content">
+  <div class="row justify-content-between">
     <div class="col-12 col-md-4 col-lg-4">
       <%= cl_image_tag @record.cover.key, alt: "Cover art for #{@record.title} by #{@record.artist}", class: "album-cover"%>
     </div>
-    <div class="col-12 col-md-4 col-lg-4 record-info">
+    <div class="col-12 col-md-7 col-lg-7 record-info">
       <h1 class="record-title"><%= @record.title %></h1>
-      <h2 class="record-artist"><%= link_to @record.artist, records_path(query: @record.artist), class: 'text-decoration-none' %></h2>
-      <p class="year"><%= @record.year %></p>
-      <p><%= link_to @record.genre.capitalize, records_path(query: @record.genre) %></p>
-      <p>Owner: <%= link_to @record.user.first_name, user_path(@record.user) %> - <%= Geocoder::Calculations.distance_between(@record.user, current_user).round(2) %> miles away</p>
+      <h3 class="record-artist"><%= link_to @record.artist, records_path(query: @record.artist), class: 'text-decoration-none' %></h3>
 
-      <%if @record.user == current_user%>
-        <%if @record.available%>
-          <span class="text-available"><i class="fas fa-record-vinyl"></i><%= link_to "Mark As Unavailable", record_path(@record, query: "change"), method: :patch %></span>
+        <p class="year"><%= @record.year %></p>
+        <p><%= link_to @record.genre.capitalize, records_path(query: @record.genre) %></p>
+
+      <div class="booking_info">
+        <p>Owner: <%= link_to @record.user.first_name, user_path(@record.user) %> - <%= Geocoder::Calculations.distance_between(@record.user, current_user).round(2) %> miles away</p>
+
+        <%if @record.user == current_user%>
+          <%if @record.available%>
+            <span class="text-available"><i class="fas fa-record-vinyl"></i><%= link_to "Mark As Unavailable", record_path(@record, query: "change"), method: :patch %></span>
+          <%else%>
+            <span class="text-unavailable"><i class="fas fa-record-vinyl"></i><%= link_to "Mark As Available", record_path(@record, query: "change"), method: :patch %></span>
+          <%end%>
+
         <%else%>
-          <span class="text-unavailable"><i class="fas fa-record-vinyl"></i><%= link_to "Mark As Available", record_path(@record, query: "change"), method: :patch %></span>
+          <p>Current Status:
+          <%if @record.available%>
+            <span class="text-available"><i class="fas fa-record-vinyl"></i>Available</span>
+          <%else%>
+            <span class="text-unavailable"><i class="fas fa-record-vinyl"></i>Unavailable</span>
+          <%end%>
         <%end%>
-
-      <%else%>
-        <p>Current Status:
-        <%if @record.available%>
-          <span class="text-available"><i class="fas fa-record-vinyl"></i>Available</span>
+        </p>
+        <%if @record.user == current_user%>
+          <div class="row justify-content-start show-btns">
+            <%= link_to "Delete", record_path(@record), class: 'btn btn-destroy col-4 ms-2 me-5', method: :delete, data: {confirm: "Delete #{@record.title} from your library"} %>
+            <%= link_to "Edit", edit_record_path(@record), class: 'btn btn-edit col-4 me-5' %>
+          </div>
+        <%elsif @record.available == true%>
+          <%= link_to "Book Now", new_record_booking_path(@record), class: "btn btn-ghost btn-book"%>
         <%else%>
-          <span class="text-unavailable"><i class="fas fa-record-vinyl"></i>Unavailable</span>
+          <button type="button" class="btn btn-grey" disabled>Book Now</button>
         <%end%>
-      <%end%>
-      </p>
-      <%if @record.user == current_user%>
-        <div class="row justify-content-evenly show-btns">
-          <%= link_to "Delete", record_path(@record), class: 'btn btn-destroy col-4', method: :delete, data: {confirm: "Delete #{@record.title} from your library"} %>
-          <%= link_to "Edit", edit_record_path(@record), class: 'btn btn-edit col-4 me-5' %>
-        </div>
-
-
-      <%elsif @record.available == true%>
-        <%= link_to "Book Now", new_record_booking_path(@record), class: "btn btn-ghost btn-book"%>
-      <%else%>
-        <button type="button" class="btn btn-grey" disabled>Book Now</button>
-      <%end%>
-    </div>
-    <div class="col-12 col-md-4 col-lg-4">
-      <div>
-        <div style="width: 100%; height: 400px;"
-        data-controller="mapbox"
-        data-mapbox-markers-value="<%= @markers.to_json %>"
-        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
       </div>
     </div>
-  </div>
+      </div>
 
-  <div class="row second-row">
-    <div class="col-12 col-md-6 col-lg-6">
-      <h3>Track List</h3>
-      <ol class="list-group list-group-numbered">
-        <% @tracks.each do |track|  %>
-          <li class="list-group-item"><%= track %></li>
+  <div class="row justify-content-between">
+    <div class="col-12 col-md-4 col-lg-4">
+        <h3>About the Album</h3>
+        <% if @record.about.present?%>
+          <p class="about"><%= @record.about.html_safe %></p>
+        <%else%>
+          <p>No information.</p>
         <%end%>
-      </ol>
-    </div>
+      </div>
 
-    <div class="col-12 col-md-6 col-lg-6">
-      <h3>About the Album</h3>
-      <% if @record.about.present?%>
-        <p class="about"><%= @record.about.html_safe %></p>
-      <%else%>
-        <p>No information.</p>
-      <%end%>
-    </div>
-
+      <div class="col-12 col-md-7 col-lg-7">
+        <h3>Track List</h3>
+        <ol class="list-group list-group-numbered">
+          <% @tracks.each do |track|  %>
+            <li class="list-group-item"><%= track %></li>
+          <%end%>
+        </ol>
+      </div>
   </div>
+
+
+
+    <div class="record-page-map">
+      <h2>Pick-up location</h2>
+      <div style="width: 100%; height: 400px;"
+      data-controller="mapbox"
+      data-mapbox-markers-value="<%= @markers.to_json %>"
+      data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+    </div>
+
+
+
 </div>
