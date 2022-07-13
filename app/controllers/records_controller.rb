@@ -3,6 +3,7 @@ require "open-uri"
 require "ostruct"
 
 class RecordsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_record, only: %i[show destroy update edit]
   def index
     if params[:query].present?
